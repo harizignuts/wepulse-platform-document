@@ -237,7 +237,7 @@ main section+section::after{content:"";position:absolute;left:50%;top:-51px;widt
 <section id="s1">
   <div class="sh"><div class="no">01</div><h2><svg class="ic2" aria-hidden="true"><use href="#i-doc"/></svg>Summary</h2><p>One marketplace for athletes, parents, coaches, brands, camps and agents.</p></div>
   <div class="sb">
-<p>WePulse is a marketplace and network for sports NIL (name, image and likeness) deals. Every role uses one account system to find each other, agree deals, sign contracts and get paid. An admin console runs verification, moderation and operations. A separate service, P Score, rates each athlete's marketability from 0 to 999.</p>
+<p>WePulse is a marketplace and network for sports NIL (name, image and likeness) deals. Athletes, parents, coaches, brands, camps and agents use one sign-in to find each other, agree deals, sign contracts and get paid. An admin console runs verification, moderation and operations. A separate service, P Score, rates each athlete's marketability from 0 to 999.</p>
     <h3><span class="n">1.1</span>What sets it apart</h3>
     <div class="roles top">
       <div class="role"><div class="hd"><h4><span class="ico"><svg class="ic2" aria-hidden="true"><use href="#i-route"/></svg></span>One deal flow</h4></div><p>Discovery, offers, contracts, e-signature, payment and payout in one place, for every role.</p></div>
@@ -256,7 +256,7 @@ main section+section::after{content:"";position:absolute;left:50%;top:-51px;widt
         <tr><td>Price range</td><td>$150 to $1,500 per month by role. Annual plans are 20% cheaper.</td></tr>
         <tr><td>AI</td><td>OpenAI gpt-4o through a budget-controlled gateway; thirteen features; about $0.005 to $0.05 per call.</td></tr>
         <tr><td>FitMatch</td><td>3D body scan with about 70 measurements from a scanning partner, with age and consent controls.</td></tr>
-        <tr><td>Child privacy</td><td>Parental consent, custodial payouts, data minimisation and retention in the backend.</td></tr>
+        <tr><td>Child privacy</td><td>Parental consent, custodial payouts, data minimisation and retention limits.</td></tr>
         <tr><td>Core</td><td>One GraphQL API on Node 24 with MySQL and Redis; a separate P Score API on Postgres.</td></tr>
         <tr><td>Cloud</td><td>AWS, with Google Cloud for push notifications. About $1.1k per month.</td></tr>
       </tbody></table></div>
@@ -264,7 +264,7 @@ main section+section::after{content:"";position:absolute;left:50%;top:-51px;widt
 </section>
 
 <section id="s2">
-  <div class="sh"><div class="no">02</div><h2><svg class="ic2" aria-hidden="true"><use href="#i-users"/></svg>Users and roles</h2><p>Seven roles, one sign-in. The role sets screens, permissions and notifications.</p></div>
+  <div class="sh"><div class="no">02</div><h2><svg class="ic2" aria-hidden="true"><use href="#i-users"/></svg>Users and roles</h2><p>Who uses WePulse and what each role can do.</p></div>
   <div class="sb">
     <p class="key">Seven roles share one sign-in. Athletes and parents join free; brands, agents and coaches pay for membership.</p>
         <div class="roles">
@@ -358,13 +358,13 @@ main section+section::after{content:"";position:absolute;left:50%;top:-51px;widt
 </section>
 
 <section id="s5">
-  <div class="sh"><div class="no">05</div><h2><svg class="ic2" aria-hidden="true"><use href="#i-spark"/></svg>AI and tokens</h2><p>Thirteen features through one controlled pipeline.</p></div>
+  <div class="sh"><div class="no">05</div><h2><svg class="ic2" aria-hidden="true"><use href="#i-spark"/></svg>AI and tokens</h2><p>Where AI is used, how it is controlled and what it costs.</p></div>
   <div class="sb">
     <p class="key">Thirteen AI features run through one controlled pipeline, with an admin kill switch, budgets and per-call usage logging.</p>
 
 <h3><span class="n">5.1</span>How a call is made</h3>
     <div class="steps">
-      <div class="step"><b>Privacy gate</b><span>Blocked if a minor's family has not allowed AI disclosure.</span></div>
+      <div class="step"><b>Privacy gate</b><span>Blocked for a minor unless the parent has allowed AI disclosure.</span></div>
       <div class="step"><b>Feature switch</b><span>Per-feature admin toggle and a global kill switch.</span></div>
       <div class="step"><b>Model call</b><span>gpt-4o via the gateway, behind a circuit breaker.</span></div>
       <div class="step"><b>Output check</b><span>Response validated against a schema.</span></div>
@@ -373,7 +373,7 @@ main section+section::after{content:"";position:absolute;left:50%;top:-51px;widt
     <p>Budgets are enforced at the gateway, and every call is logged.</p>
     
 
-<h3><span class="n">5.2</span>Features and token caps</h3>
+<h3><span class="n">5.2</span>Features and reply limits</h3>
     <div class="bars">
       <div class="bar"><span>Search</span><div class="tr"><div class="fl" style="width:12.5%"></div></div><b>512</b></div>
       <div class="bar"><span>Assistant chat</span><div class="tr"><div class="fl" style="width:25%"></div></div><b>1,024</b></div>
@@ -404,7 +404,7 @@ main section+section::after{content:"";position:absolute;left:50%;top:-51px;widt
       <div><b>1 to 5K</b><span>input tokens per call</span></div>
       <div><b>0.3 to 4K</b><span>output tokens per call</span></div>
       <div><b>$0.005 to $0.05</b><span>cost per call</span></div>
-      <div><b id="tok">45M</b><span>tokens per month in the model in 7.4</span></div>
+      <div><b id="tok">45M</b><span>tokens per month at the 7.4 calculator defaults</span></div>
     </div>
     <p>Cost uses list prices: $0.0025 per 1,000 input tokens and $0.01 per 1,000 output tokens.</p>
     
@@ -472,7 +472,7 @@ main section+section::after{content:"";position:absolute;left:50%;top:-51px;widt
 </section>
 
 <section id="s7">
-  <div class="sh"><div class="no">07</div><h2><svg class="ic2" aria-hidden="true"><use href="#i-coin"/></svg>Business model and ROI</h2><p>Three revenue levers, a measurable cost base and a what-if model.</p></div>
+  <div class="sh"><div class="no">07</div><h2><svg class="ic2" aria-hidden="true"><use href="#i-coin"/></svg>Business model and ROI</h2><p>Revenue levers, a worked example, a what-if calculator and the cost base.</p></div>
   <div class="sb">
     <p class="key">Three revenue levers: memberships of $150 to $1,500 a month, a 10% fee on each deal, and agent commission.</p>
 
@@ -553,7 +553,7 @@ main section+section::after{content:"";position:absolute;left:50%;top:-51px;widt
 <h3><span class="n">7.5</span>Monthly cost base</h3>
     <div class="glance">
       <div><b>$1.0-1.5k</b><span>approximate AWS cost per month, all environments</span></div>
-      <div><b>~$1.1k</b><span>typical month</span></div>
+      <div><b>~$1.1k</b><span>central estimate</span></div>
       <div><b>$0.005-0.05</b><span>AI cost per call</span></div>
     </div>
     <div class="ref"><div class="rh"><span class="tier"><svg class="ic2 tn" aria-hidden="true"><use href="#i-doc"/></svg>Reference</span>What the cost covers</div>
@@ -573,7 +573,7 @@ main section+section::after{content:"";position:absolute;left:50%;top:-51px;widt
 </section>
 
 <section id="s8">
-  <div class="sh"><div class="no">08</div><h2><svg class="ic2" aria-hidden="true"><use href="#i-card"/></svg>Subscriptions</h2><p>Memberships for Coach, Agent and Brand, sold through Stripe Checkout.</p></div>
+  <div class="sh"><div class="no">08</div><h2><svg class="ic2" aria-hidden="true"><use href="#i-card"/></svg>Subscriptions</h2><p>Plans, prices and how membership is enforced.</p></div>
   <div class="sb">
     <p class="key">Coach, Agent and Brand roles are sold by monthly or annual subscription; annual plans are 20% cheaper.</p>
 
@@ -636,7 +636,7 @@ main section+section::after{content:"";position:absolute;left:50%;top:-51px;widt
 </section>
 
 <section id="s10">
-  <div class="sh"><div class="no">10</div><h2><svg class="ic2" aria-hidden="true"><use href="#i-layers"/></svg>Architecture</h2><p>One API is the source of truth. Every client, and the score engine, connect to it.</p></div>
+  <div class="sh"><div class="no">10</div><h2><svg class="ic2" aria-hidden="true"><use href="#i-layers"/></svg>Architecture</h2><p>How the apps, API, data and vendors fit together.</p></div>
   <div class="sb">
     <p class="key">One GraphQL API is the single source of truth for the mobile app, web hub, brand dashboard, admin console and the P Score engine.</p>
 
@@ -728,7 +728,7 @@ main section+section::after{content:"";position:absolute;left:50%;top:-51px;widt
 </section>
 
 <section id="s11">
-  <div class="sh"><div class="no">11</div><h2><svg class="ic2" aria-hidden="true"><use href="#i-cloud"/></svg>Cloud providers</h2><p>AWS runs the platform, Google handles push, vendors supply specialist services.</p></div>
+  <div class="sh"><div class="no">11</div><h2><svg class="ic2" aria-hidden="true"><use href="#i-cloud"/></svg>Cloud providers</h2><p>Where the platform runs and which vendors it uses.</p></div>
   <div class="sb">
     <p class="key">AWS runs the platform, Google Cloud delivers push notifications, and specialist vendors cover payments, e-signature, AI and body scans.</p>
 
@@ -737,7 +737,7 @@ main section+section::after{content:"";position:absolute;left:50%;top:-51px;widt
       <thead><tr><th>Provider</th><th>Used for</th><th>Cost model</th></tr></thead>
       <tbody>
         <tr><td>Google Cloud, Firebase</td><td>Push delivery; directory lookup for the admin gate</td><td>Free tiers</td></tr>
-        <tr><td>OpenAI via Axemere gateway</td><td>AI features</td><td>Per token; gateway enforces budgets</td></tr>
+        <tr><td>OpenAI through a budget gateway</td><td>AI features</td><td>Per token; gateway enforces budgets</td></tr>
         <tr><td>Stripe</td><td>Memberships, deal payments, payouts</td><td>Fees per transaction</td></tr>
         <tr><td>DocuSign</td><td>E-signature, parental consent</td><td>Per envelope or plan</td></tr>
         <tr><td>FitMatch</td><td>Body scan</td><td>Vendor fee</td></tr>
@@ -770,7 +770,7 @@ main section+section::after{content:"";position:absolute;left:50%;top:-51px;widt
 </section>
 
 <section id="s12">
-  <div class="sh"><div class="no">12</div><h2><svg class="ic2" aria-hidden="true"><use href="#i-code"/></svg>Tech stack</h2><p>TypeScript across the platform, OpenTofu for infrastructure.</p></div>
+  <div class="sh"><div class="no">12</div><h2><svg class="ic2" aria-hidden="true"><use href="#i-code"/></svg>Tech stack</h2><p>Languages, frameworks and test coverage.</p></div>
   <div class="sb">
     <p class="key">TypeScript across the platform, backed by more than 9,000 automated tests.</p>
         <div class="tw"><table>
@@ -806,7 +806,7 @@ main section+section::after{content:"";position:absolute;left:50%;top:-51px;widt
 <h3><span class="n">13.1</span>Controls</h3>
     <ul class="l">
       <li>Deny-by-default permissions with a build gate on coverage; query depth and complexity limits; introspection off in production; Redis rate limits; a firewall on the API.</li>
-      <li>Child privacy: parental consent by e-signature with parent-before-minor ordering, custodial payouts, quarantine, data minimisation, a 12-month retention sweep and birthdate attestation limits.</li>
+      <li>Child privacy: parental consent by e-signature with parent-before-minor ordering, custodial payouts, data minimisation, a 12-month retention sweep and birthdate attestation limits.</li>
       <li>Payments: signed, idempotent webhooks; circuit breakers on about a dozen vendor calls; redaction of keys and personal data in logs.</li>
       <li>Cloud: organization policies (region lock, root-user deny, MFA for sensitive actions), identity center tiers, break-glass role, organization audit trail, GuardDuty and Config in production, public access blocked on storage, Object Lock and dedicated keys for legal documents, short-lived deploy identities.</li>
     </ul>
@@ -823,6 +823,7 @@ main section+section::after{content:"";position:absolute;left:50%;top:-51px;widt
         <tr><td>Verified parental consent</td><td>A parent's legally recorded consent for a child's account, collected by e-signature.</td></tr>
         <tr><td>Connect account</td><td>A Stripe account that lets an athlete, parent or agent receive payouts.</td></tr>
         <tr><td>Gateway</td><td>A service between the platform and the AI provider that enforces budgets.</td></tr>
+        <tr><td>Custodial payout</td><td>A payout to a parent's account instead of the athlete's, used for athletes under 18.</td></tr>
         <tr><td>Fargate</td><td>AWS service that runs containers without managing servers.</td></tr>
       </tbody></table></div>
   </div>
