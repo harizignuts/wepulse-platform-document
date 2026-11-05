@@ -226,6 +226,17 @@ main section{margin-bottom:0;scroll-margin-top:24px}
 main section+section{margin-top:96px;position:relative}
 main section+section::before{content:"";position:absolute;left:0;right:0;top:-48px;height:1px;background:var(--line)}
 main section+section::after{content:"";position:absolute;left:50%;top:-51px;width:56px;height:5px;margin-left:-28px;background:var(--signal);border-radius:3px}
+
+.prov{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:18px 28px;align-items:center;margin:14px 0 6px;padding:18px 20px;border:1px solid var(--line);border-top:3px solid var(--signal);border-radius:6px;background:var(--faint)}
+.prov .pm{display:flex;align-items:center;gap:14px}
+.prov .pm .ico{width:52px;height:52px;border-radius:12px}
+.prov .pm .ico .ic2{width:28px;height:28px}
+.prov .pm b{display:block;font-family:var(--display);font-size:clamp(24px,3.2vw,32px);line-height:1.05;text-transform:uppercase}
+.prov .pm span{font-size:14px;color:var(--muted)}
+.prov ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:8px 18px;font-size:14.5px}
+.prov li{padding-left:18px;position:relative}
+.prov li::before{content:"";position:absolute;left:0;top:.5em;width:8px;height:8px;border-radius:2px;background:var(--signal)}
+@media (max-width:760px){.prov{grid-template-columns:1fr}.prov ul{grid-template-columns:1fr}}
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4M9 12h6M9 16h6"/></symbol><symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6"/><circle cx="17" cy="9" r="2.5"/><path d="M17 14c2.8 0 4.5 1.9 4.5 4.5"/></symbol><symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></symbol><symbol id="i-briefcase" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18"/></symbol><symbol id="i-swap" viewBox="0 0 24 24"><path d="M4 8h14l-3.5-3.5M20 16H6l3.5 3.5"/></symbol><symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></symbol><symbol id="i-clip" viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4h6v3H9zM9 12h6M9 16h4"/></symbol><symbol id="i-flag" viewBox="0 0 24 24"><path d="M5 21V4M5 4h12l-2 4 2 4H5"/></symbol><symbol id="i-sliders" viewBox="0 0 24 24"><path d="M4 7h10M18 7h2M4 17h2M10 17h10"/><circle cx="16" cy="7" r="2"/><circle cx="8" cy="17" r="2"/></symbol><symbol id="i-scan" viewBox="0 0 24 24"><path d="M4 8V5a1 1 0 0 1 1-1h3M16 4h3a1 1 0 0 1 1 1v3M20 16v3a1 1 0 0 1-1 1h-3M8 20H5a1 1 0 0 1-1-1v-3M4 12h16"/></symbol><symbol id="i-gauge" viewBox="0 0 24 24"><path d="M4 17a8 8 0 1 1 16 0"/><path d="M12 17l4-5"/><circle cx="12" cy="17" r="1"/></symbol><symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/><path d="M19 17v4M17 19h4"/></symbol><symbol id="i-blocks" viewBox="0 0 24 24"><rect x="4" y="4" width="7" height="7" rx="1"/><rect x="13" y="4" width="7" height="7" rx="1"/><rect x="4" y="13" width="7" height="7" rx="1"/><rect x="13" y="13" width="7" height="7" rx="1"/></symbol><symbol id="i-coin" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M14.5 9.2c-.5-.8-1.4-1.2-2.5-1.2-1.4 0-2.5.7-2.5 1.8 0 2.5 5 1.2 5 3.7 0 1.1-1.1 1.8-2.5 1.8-1.2 0-2.1-.5-2.6-1.3M12 6v2M12 16v2"/></symbol><symbol id="i-card" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18M7 15h4"/></symbol><symbol id="i-layers" viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5z"/><path d="M3 12.5l9 5 9-5M3 16.5l9 5 9-5"/></symbol><symbol id="i-cloud" viewBox="0 0 24 24"><path d="M7 18a4 4 0 0 1-.5-8A6 6 0 0 1 18 11a3.5 3.5 0 0 1-.5 7z"/></symbol><symbol id="i-code" viewBox="0 0 24 24"><path d="M8 8l-4 4 4 4M16 8l4 4-4 4M14 5l-4 14"/></symbol><symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></symbol><symbol id="i-book" viewBox="0 0 24 24"><path d="M5 4h10a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3z"/><path d="M5 17a3 3 0 0 1 3-3h10"/></symbol><symbol id="i-route" viewBox="0 0 24 24"><circle cx="6" cy="6" r="2"/><circle cx="18" cy="18" r="2"/><path d="M8 6h6a3 3 0 0 1 0 6h-4a3 3 0 0 0 0 6h6"/></symbol></svg>
@@ -243,7 +254,7 @@ main section+section::after{content:"";position:absolute;left:50%;top:-51px;widt
       <div class="role"><div class="hd"><h4><span class="ico"><svg class="ic2" aria-hidden="true"><use href="#i-route"/></svg></span>One deal flow</h4></div><p>Discovery, offers, contracts, e-signature, payment and payout in one place, for every role.</p></div>
       <div class="role"><div class="hd"><h4><span class="ico"><svg class="ic2" aria-hidden="true"><use href="#i-shield"/></svg></span>Safe for young athletes</h4></div><p>Parental consent, approvals, custodial payouts and data controls for athletes under 18.</p></div>
       <div class="role"><div class="hd"><h4><span class="ico"><svg class="ic2" aria-hidden="true"><use href="#i-gauge"/></svg></span>P Score</h4></div><p>A proprietary 0 to 999 marketability index that gives brands and agents a common yardstick.</p></div>
-      <div class="role"><div class="hd"><h4><span class="ico"><svg class="ic2" aria-hidden="true"><use href="#i-spark"/></svg></span>AI assistance</h4></div><p>Thirteen features: athlete search, offer drafting, pitches, contract review, deal scouting and campaign ROI.</p></div>
+      <div class="role"><div class="hd"><h4><span class="ico"><svg class="ic2" aria-hidden="true"><use href="#i-spark"/></svg></span>AI assistance</h4></div><p>Powered by OpenAI GPT-4o. Thirteen features: athlete search, offer drafting, pitches, contract review, deal scouting and campaign ROI.</p></div>
       <div class="role"><div class="hd"><h4><span class="ico"><svg class="ic2" aria-hidden="true"><use href="#i-scan"/></svg></span>FitMatch</h4></div><p>A 3D body scan with about 70 athletic measurements inside the athlete profile.</p></div>
       <div class="role"><div class="hd"><h4><span class="ico"><svg class="ic2" aria-hidden="true"><use href="#i-coin"/></svg></span>Revenue built in</h4></div><p>Memberships for Coach, Agent and Brand, a fee on every deal and agent commission in the payment flow.</p></div>
     </div>
@@ -254,7 +265,7 @@ main section+section::after{content:"";position:absolute;left:50%;top:-51px;widt
         <tr><td>Clients</td><td>React Native app for six roles, Next.js web hub, brand dashboard, admin console.</td></tr>
         <tr><td>Revenue</td><td>Paid memberships for Coach, Agent and Brand; a 10% fee added to each deal; agent commission inside the payment flow.</td></tr>
         <tr><td>Price range</td><td>$150 to $1,500 per month by role. Annual plans are 20% cheaper.</td></tr>
-        <tr><td>AI</td><td>OpenAI gpt-4o through a budget-controlled gateway; thirteen features; about $0.005 to $0.05 per call.</td></tr>
+        <tr><td>AI</td><td>OpenAI GPT-4o through a budget-controlled gateway; thirteen features; about $0.005 to $0.05 per call.</td></tr>
         <tr><td>FitMatch</td><td>3D body scan with about 70 measurements from a scanning partner, with age and consent controls.</td></tr>
         <tr><td>Child privacy</td><td>Parental consent, custodial payouts, data minimisation and retention limits.</td></tr>
         <tr><td>Core</td><td>One GraphQL API on Node 24 with MySQL and Redis; a separate P Score API on Postgres.</td></tr>
@@ -360,13 +371,17 @@ main section+section::after{content:"";position:absolute;left:50%;top:-51px;widt
 <section id="s5">
   <div class="sh"><div class="no">05</div><h2><svg class="ic2" aria-hidden="true"><use href="#i-spark"/></svg>AI and tokens</h2><p>Where AI is used, how it is controlled and what it costs.</p></div>
   <div class="sb">
-    <p class="key">Thirteen AI features run through one controlled pipeline, with an admin kill switch, budgets and per-call usage logging.</p>
+    <p class="key">Thirteen AI features, powered by OpenAI GPT-4o, run through one controlled pipeline.</p>
+    <div class="prov">
+      <div class="pm"><span class="ico"><svg class="ic2" aria-hidden="true"><use href="#i-spark"/></svg></span><div><b>OpenAI GPT-4o</b><span>The model behind all 13 features</span></div></div>
+      <ul><li>Budget-controlled gateway</li><li>Admin kill switch and per-feature toggles</li><li>Every call logged with tokens and cost</li><li>Responses checked against a schema</li></ul>
+    </div>
 
 <h3><span class="n">5.1</span>How a call is made</h3>
     <div class="steps">
       <div class="step"><b>Privacy gate</b><span>Blocked for a minor unless the parent has allowed AI disclosure.</span></div>
       <div class="step"><b>Feature switch</b><span>Per-feature admin toggle and a global kill switch.</span></div>
-      <div class="step"><b>Model call</b><span>gpt-4o via the gateway, behind a circuit breaker.</span></div>
+      <div class="step"><b>OpenAI call</b><span>GPT-4o via the gateway, behind a circuit breaker.</span></div>
       <div class="step"><b>Output check</b><span>Response validated against a schema.</span></div>
       <div class="step"><b>Usage log</b><span>Tokens and estimated cost stored per call.</span></div>
     </div>
@@ -737,7 +752,7 @@ main section+section::after{content:"";position:absolute;left:50%;top:-51px;widt
       <thead><tr><th>Provider</th><th>Used for</th><th>Cost model</th></tr></thead>
       <tbody>
         <tr><td>Google Cloud, Firebase</td><td>Push delivery; directory lookup for the admin gate</td><td>Free tiers</td></tr>
-        <tr><td>OpenAI through a budget gateway</td><td>AI features</td><td>Per token; gateway enforces budgets</td></tr>
+        <tr><td>OpenAI (GPT-4o)</td><td>All 13 AI features, through a budget-controlled gateway</td><td>Per token; gateway enforces budgets</td></tr>
         <tr><td>Stripe</td><td>Memberships, deal payments, payouts</td><td>Fees per transaction</td></tr>
         <tr><td>DocuSign</td><td>E-signature, parental consent</td><td>Per envelope or plan</td></tr>
         <tr><td>FitMatch</td><td>Body scan</td><td>Vendor fee</td></tr>
