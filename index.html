@@ -195,19 +195,13 @@ footer p{max-width:80ch}
 @media (prefers-reduced-motion:no-preference){#bar{transition:transform .08s linear}}
 
 .key{font-family:var(--display);font-size:clamp(20px,2.5vw,25px);line-height:1.28;font-weight:600;margin:16px 0 12px;padding:2px 0 2px 16px;border-left:4px solid var(--signal);max-width:60ch;color:var(--ink,inherit)}
-details.more{border-top:1px solid var(--line);margin:22px 0 0}
-details.more:last-child{border-bottom:1px solid var(--line)}
-details.more>summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 2px}
-details.more>summary::-webkit-details-marker{display:none}
-details.more>summary::after{content:"+";font-family:var(--mono);font-size:20px;line-height:1;color:var(--signal);border:1.5px solid var(--signal);border-radius:4px;width:26px;height:26px;display:inline-flex;align-items:center;justify-content:center;flex:none}
-details.more[open]>summary::after{content:"\2212"}
-details.more>summary h3{margin:0}
-details.more>summary h3.sm{font-size:15px;letter-spacing:.05em;color:var(--muted)}
-details.more>summary:hover h3{color:var(--signal)}
-details.more>summary:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
-.tools{display:flex;justify-content:flex-end;padding:10px 0 2px}
-.tools button{font-family:var(--mono);font-size:12px;letter-spacing:.04em;background:none;border:1px solid var(--line);color:var(--muted);padding:6px 11px;border-radius:4px;cursor:pointer}
-.tools button:hover{border-color:var(--signal);color:var(--signal)}
+
+.ref{margin:26px 0 8px;padding:4px 18px 14px;background:var(--faint);border:1px solid var(--line);border-left:3px solid var(--muted);border-radius:5px}
+.ref .rh{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin:12px 0 4px;font-family:var(--display);font-weight:700;font-size:14.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
+.ref .rh .n{display:inline-flex;align-items:center;justify-content:center;min-width:38px;height:22px;padding:0 7px;border:1.5px solid var(--muted);border-radius:4px;font-family:var(--mono);font-size:12px;font-weight:600;color:var(--muted)}
+.ref .tier{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.1em;padding:2px 7px;border-radius:999px;background:var(--page);border:1px solid var(--line)}
+.ref table,.ref p,.ref li,.ref .step span{font-size:13.5px}
+.ref .tw{margin-top:8px}
 </style>
 
 <div id="bar"></div>
@@ -240,7 +234,6 @@ details.more>summary:focus-visible{outline:2px solid var(--signal);outline-offse
   </div>
 </aside>
 <main>
-<div class="tools"><button id="alld" type="button">Expand all details</button></div>
 <section id="s1">
   <div class="sh"><div class="no">01</div><h2>Summary</h2><p>One marketplace for athletes, families, coaches, brands, camps and agents.</p></div>
   <div class="sb">
@@ -283,7 +276,7 @@ details.more>summary:focus-visible{outline:2px solid var(--signal);outline-offse
       <div class="role"><div class="hd"><h4>Camp</h4><span class="pill paid">MEMBERSHIP</span></div><p>Create and archive events, attendance, applications and join requests, athlete pipeline with parent status, staff, invitations, analytics.</p></div>
       <div class="role"><div class="hd"><h4>Admin</h4><span class="pill none">INTERNAL</span></div><p>Users, verification queues, moderation and appeals, disputes, analytics, P Score administration, education content, AI controls, deployments, audit.</p></div>
     </div>
-    <details class="more"><summary><h3 class="sm">App size by role</h3></summary>
+    <div class="ref"><div class="rh"><span class="tier">Reference</span>App size by role</div>
 <div class="glance">
       <div><b>216</b><span>mobile screen files</span></div>
       <div><b>48 to 71</b><span>stack screens per role</span></div>
@@ -291,7 +284,7 @@ details.more>summary:focus-visible{outline:2px solid var(--signal);outline-offse
       <div><b>~39</b><span>admin console screens</span></div>
     </div>
     <p>By role, screen files are: Athlete 67, Brand 35, Camp 22, Agent 22, Parent 20, Coach 20, shared 11, sign-in 9, child-privacy 6. Nearly every screen reads and writes live data.</p>
-</details>
+</div>
   </div>
 </section>
 
@@ -308,7 +301,7 @@ details.more>summary:focus-visible{outline:2px solid var(--signal);outline-offse
       <div class="step"><b>Results</b><span>Worker checks the partner every five minutes with growing waits, up to 20 tries.</span></div>
       <div class="step"><b>View</b><span>Measurements plus 3D model from a time-limited link.</span></div>
     </div>
-    <details class="more"><summary><h3 class="sm">Eligibility, privacy and deletion rules</h3></summary>
+    <div class="ref"><div class="rh"><span class="tier">Reference</span>Eligibility, privacy and deletion rules</div>
 <div class="tw"><table>
       <thead><tr><th>Area</th><th>Detail</th></tr></thead>
       <tbody>
@@ -319,7 +312,7 @@ details.more>summary:focus-visible{outline:2px solid var(--signal);outline-offse
         <tr><td>Privacy</td><td>The partner receives a pseudonymised athlete identifier.</td></tr>
         <tr><td>Deletion</td><td>Erasure requests go to the partner and are confirmed by an automated worker. They are triggered by child data deletion, a parent request or self-delete.</td></tr>
       </tbody></table></div>
-</details>
+</div>
   </div>
 </section>
 
@@ -347,7 +340,7 @@ details.more>summary:focus-visible{outline:2px solid var(--signal);outline-offse
       <div class="bar"><span>Face recognition</span><div class="tr"><div class="fl" style="width:28.6%"></div></div><b>10%</b></div>
       <div class="bar"><span>Name recognition</span><div class="tr"><div class="fl" style="width:28.6%"></div></div><b>10%</b></div>
     </div>
-    <details class="more"><summary><h3 class="sm">How scores are calculated and kept current</h3></summary>
+    <div class="ref"><div class="rh"><span class="tier">Reference</span>How scores are calculated and kept current</div>
 <div class="tw"><table>
       <thead><tr><th>Component</th><th>Inputs</th></tr></thead>
       <tbody>
@@ -360,7 +353,7 @@ details.more>summary:focus-visible{outline:2px solid var(--signal);outline-offse
       <li>Weights live in versioned formulas. Historical scores stay tied to the formula that produced them. Admins can preview, activate, recalculate and set per-athlete overrides.</li>
       <li>Sync with the platform: on profile creation (when enabled), every 30 minutes, weekly refresh and on read.</li>
     </ul>
-</details>
+</div>
   </div>
 </section>
 
@@ -388,7 +381,7 @@ details.more>summary:focus-visible{outline:2px solid var(--signal);outline-offse
       <div class="bar"><span>Deal scout</span><div class="tr"><div class="fl" style="width:80%"></div></div><b>3,276</b></div>
       <div class="bar"><span>Other 9 features</span><div class="tr"><div class="fl hi" style="width:100%"></div></div><b>4,096</b></div>
     </div>
-    <details class="more"><summary><h3 class="sm">Full feature list</h3></summary>
+    <div class="ref"><div class="rh"><span class="tier">Reference</span>Full feature list</div>
 <div class="tw"><table>
       <thead><tr><th>Feature</th><th>Used by</th><th class="n">Max output</th></tr></thead>
       <tbody>
@@ -403,7 +396,7 @@ details.more>summary:focus-visible{outline:2px solid var(--signal);outline-offse
         <tr><td>Campaign ROI predictor</td><td>Brand</td><td class="n">1,500</td></tr>
         <tr><td>Journey reel clip analysis (background worker)</td><td>Athlete</td><td class="n">4,096</td></tr>
       </tbody></table></div>
-</details>
+</div>
     
 
 <h3><span class="n">5.3</span>Approximate usage</h3>
@@ -416,14 +409,14 @@ details.more>summary:focus-visible{outline:2px solid var(--signal);outline-offse
     <p>Cost uses list prices: $0.0025 per 1,000 input tokens and $0.01 per 1,000 output tokens.</p>
     
 
-<details class="more"><summary><h3><span class="n">5.4</span>Controls</h3></summary>
+<div class="ref"><div class="rh"><span class="tier">Reference</span><span class="n">5.4</span>Controls</div>
 
     <ul class="l">
       <li>Per-minute limits in production: chat 20, search 15, offer analysis, draft, pitch and brief 10, contract review 5; other queries share 60 per minute. Global limits are 100 requests and 50 mutations per minute per caller.</li>
       <li>Brand AI on an athlete needs the athlete to be eligible or to have a prior relationship.</li>
       <li>Admins can switch features on and off and read usage statistics.</li>
     </ul>
-</details>
+</div>
   </div>
 </section>
 
@@ -459,22 +452,22 @@ details.more>summary:focus-visible{outline:2px solid var(--signal);outline-offse
       </tbody></table></div>
     
 
-<details class="more"><summary><h3><span class="n">6.2</span>Admin console</h3></summary>
+<div class="ref"><div class="rh"><span class="tier">Reference</span><span class="n">6.2</span>Admin console</div>
 
     <p>About 39 screens: user management (suspend, activate, bulk actions, activity), verification queue (claim, approve, reject, request information, escalate), onboarding, moderation with appeals and flagging rules, offer disputes, analytics (NIL, engagement, sports, geographic), P Score administration, education editor with revisions and publishing, AI feature controls and usage, deployment console, audit logs, system health, announcements and settings.</p>
     
-</details>
+</div>
 
-<details class="more"><summary><h3><span class="n">6.3</span>Brand dashboard</h3></summary>
+<div class="ref"><div class="rh"><span class="tier">Reference</span><span class="n">6.3</span>Brand dashboard</div>
 
     <p>24 signed-in routes: athlete discovery with AI search and favorites; AI match engine, campaign briefs, pricing intelligence and ROI predictor; brand projects and pipeline; offers and templates; opportunities and applicants; contracts and deals; invoices, record payment, refund, Stripe payment and history; connections; settings with billing and verification; membership.</p>
     
-</details>
+</div>
 
-<details class="more"><summary><h3><span class="n">6.4</span>P Score API</h3></summary>
+<div class="ref"><div class="rh"><span class="tier">Reference</span><span class="n">6.4</span>P Score API</div>
 
     <p>Public: health, formula, benchmarks, leaderboard, score by slug, athlete trend. Service access: calculate, submissions, lookup by email, change feed, sync. Admin: formula versions, overrides, preview, recalculation, audit.</p>
-</details>
+</div>
   </div>
 </section>
 
@@ -563,7 +556,7 @@ details.more>summary:focus-visible{outline:2px solid var(--signal);outline-offse
       <div><b>~$1.1k</b><span>typical month</span></div>
       <div><b>$0.005-0.05</b><span>AI cost per call</span></div>
     </div>
-    <details class="more"><summary><h3 class="sm">What the cost covers</h3></summary>
+    <div class="ref"><div class="rh"><span class="tier">Reference</span>What the cost covers</div>
 <div class="tw"><table>
       <thead><tr><th>Cost line</th><th>What it covers</th></tr></thead>
       <tbody>
@@ -573,7 +566,7 @@ details.more>summary:focus-visible{outline:2px solid var(--signal);outline-offse
         <tr><td>Google Cloud</td><td>Push notifications and directory lookup, close to $0</td></tr>
         <tr><td>Usage based</td><td>AI model calls, Stripe processing, DocuSign, FitMatch, Apify, Twilio, email, Sentry, PostHog, Expo, GitHub</td></tr>
       </tbody></table></div>
-</details>
+</div>
 
     
   </div>
@@ -608,7 +601,7 @@ details.more>summary:focus-visible{outline:2px solid var(--signal);outline-offse
     </div>
     
 
-<details class="more"><summary><h3><span class="n">8.3</span>Where it is checked</h3></summary>
+<div class="ref"><div class="rh"><span class="tier">Reference</span><span class="n">8.3</span>Where it is checked</div>
 
     <div class="tw"><table>
       <thead><tr><th>Point</th><th>Behavior</th></tr></thead>
@@ -619,7 +612,7 @@ details.more>summary:focus-visible{outline:2px solid var(--signal);outline-offse
         <tr><td>Mobile</td><td>Paid roles check out on the web and use the app straight away.</td></tr>
       </tbody></table></div>
     <div class="call ok"><span class="ic">Ready</span><div>Catalog, checkout, webhooks, customer portal and sign-in groups are in place.</div></div>
-</details>
+</div>
   </div>
 </section>
 
@@ -700,7 +693,7 @@ details.more>summary:focus-visible{outline:2px solid var(--signal);outline-offse
     </div>
     <p>Every environment deploys with a short-lived identity from GitHub, so no long-lived cloud keys are stored. Infrastructure changes are applied locally after review.</p>
 
-<details class="more"><summary><h3><span class="n">10.4</span>Components</h3></summary>
+<div class="ref"><div class="rh"><span class="tier">Reference</span><span class="n">10.4</span>Components</div>
 
     <div class="tw"><table>
       <thead><tr><th>Component</th><th>Runs on</th><th>Role</th></tr></thead>
@@ -716,9 +709,9 @@ details.more>summary:focus-visible{outline:2px solid var(--signal);outline-offse
       </tbody></table></div>
 
     
-</details>
+</div>
 
-<details class="more"><summary><h3><span class="n">10.5</span>Environments</h3></summary>
+<div class="ref"><div class="rh"><span class="tier">Reference</span><span class="n">10.5</span>Environments</div>
 
     <div class="tw"><table>
       <thead><tr><th>Environment</th><th>Address</th><th>Notes</th></tr></thead>
@@ -730,7 +723,7 @@ details.more>summary:focus-visible{outline:2px solid var(--signal);outline-offse
       </tbody></table></div>
 
     
-</details>
+</div>
   </div>
 </section>
 
@@ -753,7 +746,7 @@ details.more>summary:focus-visible{outline:2px solid var(--signal);outline-offse
         <tr><td>Sentry, PostHog, Expo EAS, GitHub</td><td>Errors, analytics, mobile builds, source and CI</td><td>Plans</td></tr>
       </tbody></table></div>
 
-<details class="more"><summary><h3><span class="n">11.2</span>AWS inventory</h3></summary>
+<div class="ref"><div class="rh"><span class="tier">Reference</span><span class="n">11.2</span>AWS inventory</div>
 
     <div class="tw"><table>
       <thead><tr><th>Service</th><th>Use</th><th>Production sizing</th></tr></thead>
@@ -772,7 +765,7 @@ details.more>summary:focus-visible{outline:2px solid var(--signal);outline-offse
         <tr><td>Route 53</td><td>DNS for wepulse.io</td><td>One zone, about 52 records</td></tr>
       </tbody></table></div>
     
-</details>
+</div>
   </div>
 </section>
 
@@ -888,5 +881,4 @@ details.more>summary:focus-visible{outline:2px solid var(--signal);outline-offse
   links.forEach(function(a){a.addEventListener('click',function(){setOpen(false)})});
 })();
 
-(function(){var b=document.getElementById('alld');if(!b)return;var open=false;b.addEventListener('click',function(){open=!open;[].forEach.call(document.querySelectorAll('details.more'),function(d){d.open=open});b.textContent=open?'Collapse all details':'Expand all details'});window.addEventListener('beforeprint',function(){[].forEach.call(document.querySelectorAll('details.more'),function(d){d.open=true})})})();
 </script>
