@@ -1,0 +1,841 @@
+<title>WePulse Platform Document</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+/* Direction: Pulse brand (mobile/src/constants/colors.ts, brand + admin dashboards). Black base, electric lime #C6FF00 reserved for action and active states, army green #5D6532 for cards, silver and white text, IBM Plex Sans and Mono as in the web dashboards. Dark-first like the app; light variant follows the brand dashboard (olive primary). */
+:root{
+  --lime:#C6FF00; --army:#5D6532; --silver:#CCCCCC;
+  --pitch:#000000; --pitch-2:#5D6532; --chalk:#ffffff;
+  --bg:#000000; --page:#0d0d0d; --ink:#ffffff; --muted:#a9a9a9; --line:#2e2e2e; --faint:#171717;
+  --signal:#C6FF00; --signal-soft:#1f2606; --good:#22C55E; --good-soft:#0f2a18; --warn:#F59E0B; --warn-soft:#2e2208;
+  --on-pitch:#ffffff; --on-pitch-mute:#DDDDDD; --on-lime:#000000;
+  --display:'IBM Plex Sans','Segoe UI',system-ui,sans-serif;
+  --body:'IBM Plex Sans','Segoe UI',system-ui,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,Menlo,monospace;
+  color-scheme:dark;
+}
+@media (prefers-color-scheme: light){:root:not([data-theme="dark"]){
+  --pitch:#000000; --pitch-2:#5D6532; --chalk:#ffffff;
+  --bg:#f2f2f2; --page:#ffffff; --ink:#171717; --muted:#5c5c5c; --line:#d9d9d9; --faint:#f5f5f5;
+  --signal:#3a6808; --signal-soft:#ecf4d9; --good:#157347; --good-soft:#e1f3e8; --warn:#8a5a00; --warn-soft:#fbf0d9;
+  color-scheme:light}}
+:root[data-theme="light"]{
+  --pitch:#000000; --pitch-2:#5D6532; --chalk:#ffffff;
+  --bg:#f2f2f2; --page:#ffffff; --ink:#171717; --muted:#5c5c5c; --line:#d9d9d9; --faint:#f5f5f5;
+  --signal:#3a6808; --signal-soft:#ecf4d9; --good:#157347; --good-soft:#e1f3e8; --warn:#8a5a00; --warn-soft:#fbf0d9;
+  color-scheme:light}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.62;margin:0}
+.gut{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
+
+/* progress + top bar */
+#bar{position:fixed;inset:0 0 auto 0;height:3px;background:var(--lime);transform-origin:left;transform:scaleX(0);z-index:30}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--pitch);z-index:29}
+
+/* cover */
+.cover{background:var(--pitch);color:var(--on-pitch);position:relative;overflow:hidden;padding-block:48px 0}
+.cover::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0 119px,rgba(198,255,0,.07) 119px 121px);pointer-events:none}
+.cover::after{content:"";position:absolute;inset:auto 0 0 0;height:6px;background:var(--lime)}
+.cin{max-width:1180px;margin:0 auto;position:relative}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--on-pitch-mute)}
+.cover h1{font-family:var(--display);font-weight:700;font-size:clamp(38px,7.2vw,80px);line-height:.98;letter-spacing:-.02em;text-transform:uppercase;margin:14px 0 16px;max-width:15ch;text-wrap:balance}
+.cover h1 em{font-style:normal;color:var(--lime)}
+.cover .lede{font-size:clamp(17px,2.2vw,21px);max-width:60ch;color:var(--on-pitch);margin:0 0 30px;opacity:.92}
+.board{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:1px;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.18);margin-bottom:-1px}
+.board div{background:var(--army);padding:14px 16px 12px}
+.board b{display:block;font-family:var(--display);font-weight:700;font-size:clamp(32px,4.4vw,44px);line-height:1;color:#fff;font-variant-numeric:tabular-nums}
+.board span{font-size:12.5px;color:var(--on-pitch-mute);letter-spacing:.02em}
+.basis{display:flex;flex-wrap:wrap;gap:6px 26px;padding:16px 0 26px;font-size:13px;color:var(--on-pitch-mute)}
+.basis b{color:var(--on-pitch);font-weight:600}
+
+/* layout */
+.shell{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:224px minmax(0,1fr);gap:40px;padding-block:34px 70px;align-items:start}
+@media (max-width:920px){.shell{grid-template-columns:minmax(0,1fr)}}
+aside{position:sticky;top:calc(28px + env(safe-area-inset-top,0px));align-self:start;z-index:25}
+.topbar{display:none}
+.side nav ol{list-style:none;margin:0;padding:0;border-left:1px solid var(--line)}
+.side .sh2{display:flex;align-items:center;justify-content:space-between;font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;padding-left:15px}
+.side .close{display:none}
+li.gl{padding:14px 0 3px 15px;font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);opacity:.75}
+li.gl:first-child{padding-top:2px}
+.side a{position:relative;display:flex;gap:10px;align-items:baseline;padding:5px 8px 5px 15px;color:var(--muted);text-decoration:none;font-size:14.5px;line-height:1.3}
+.side a .no{font-family:var(--mono);font-size:12.5px;min-width:24px;font-variant-numeric:tabular-nums;opacity:.8}
+.side a:hover{color:var(--ink)}
+.side li.on a{color:var(--ink);font-weight:600}
+.side li.on a::before{content:"";position:absolute;left:-1px;top:3px;bottom:3px;width:3px;border-radius:2px;background:var(--signal)}
+.side li.on .no{color:var(--signal);opacity:1}
+.side a:focus-visible{outline:2px solid var(--signal);outline-offset:-2px;border-radius:4px}
+.read{margin:18px 0 0 15px;font-family:var(--mono);font-size:11.5px;color:var(--muted)}
+.meter{height:3px;background:var(--line);border-radius:3px;margin-top:7px;overflow:hidden}
+#meterfill{height:100%;width:0;background:var(--signal)}
+@media (max-height:640px){li.gl{display:none}.side a{padding-block:3px}}
+@media (max-width:920px){
+  aside{top:env(safe-area-inset-top,0px);margin:0 calc(-1 * max(16px,env(safe-area-inset-left,0px)));padding:0 max(16px,env(safe-area-inset-left,0px));background:color-mix(in srgb,var(--bg) 84%,transparent);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+  .topbar{display:flex;align-items:center;gap:12px;height:54px}
+  .topbar .mk{width:9px;height:9px;border-radius:50%;background:var(--lime);box-shadow:0 0 0 4px rgba(198,255,0,.18);flex:none}
+  .topbar b{font-size:15px;font-weight:700;letter-spacing:.02em}
+  .navbtn{margin-left:auto;display:flex;align-items:center;gap:10px;font:inherit;color:var(--ink);background:var(--faint);border:1px solid var(--line);border-radius:999px;padding:5px 12px 5px 6px;cursor:pointer;min-width:0;max-width:68%}
+  .navbtn i{font-style:normal;font-family:var(--mono);font-weight:600;font-size:12.5px;background:var(--lime);color:#000;border-radius:999px;min-width:28px;height:28px;display:grid;place-items:center;flex:none}
+  .navbtn .nm{font-weight:600;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .navbtn .bg{font-family:var(--mono);font-size:11px;color:var(--muted);flex:none}
+  .side{display:none}
+  .side.open{display:flex;flex-direction:column;position:fixed;inset:0;z-index:60;background:var(--bg);padding:calc(18px + env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-left,0px)) calc(20px + env(safe-area-inset-bottom,0px))}
+  .side .sh2{font-family:var(--display);font-size:26px;font-weight:700;letter-spacing:0;text-transform:none;color:var(--ink);padding:0;margin-bottom:16px}
+  .side .close{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:var(--faint);color:var(--ink);font-size:16px;cursor:pointer}
+  .side nav ol{border:0;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  li.gl{display:none}
+  .side a{border:1px solid var(--line);border-radius:12px;padding:12px 12px;font-size:15px;align-items:center;background:var(--page)}
+  .side li.on a{background:var(--lime);border-color:var(--lime);color:#000}
+  .side li.on a::before{display:none}
+  .side li.on .no{color:#000}
+  .read{margin:16px 0 0}
+}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+main{min-width:0}
+
+/* sections */
+section{background:var(--page);border:1px solid var(--line);border-radius:6px;margin-bottom:22px;scroll-margin-top:16px;overflow:hidden}
+.sh{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 18px;align-items:end;padding:22px clamp(18px,3.5vw,38px) 16px;background:linear-gradient(0deg,var(--faint),var(--page));border-bottom:1px solid var(--line)}
+.sh .no{font-family:var(--display);font-weight:700;font-size:clamp(44px,6.4vw,68px);line-height:.8;color:var(--signal);grid-row:1 / span 2}
+.sh h2{font-family:var(--display);font-weight:700;font-size:clamp(23px,3.2vw,32px);line-height:1.05;margin:0;text-transform:uppercase;letter-spacing:.005em;align-self:end}
+.sh p{margin:0;color:var(--muted);font-size:15px;max-width:60ch;align-self:start}
+.sb{padding:6px clamp(18px,3.5vw,38px) 28px}
+h3{font-family:var(--display);font-weight:700;font-size:18px;text-transform:uppercase;letter-spacing:.04em;margin:32px 0 10px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+h3 .n{display:inline-flex;align-items:center;justify-content:center;min-width:42px;height:26px;padding:0 8px;border:1.5px solid var(--signal);border-radius:4px;font-family:var(--mono);font-size:13px;font-weight:600;color:var(--signal);letter-spacing:.02em;line-height:1;text-transform:none;font-variant-numeric:tabular-nums}
+p{margin:0 0 12px;max-width:74ch}
+ul.l,ol.l{margin:0 0 14px;padding-left:20px;max-width:76ch}
+ul.l li,ol.l li{margin:5px 0}
+ul.l li::marker{color:var(--signal)}
+.glance{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:18px 0 6px}
+.glance div{border-left:3px solid var(--signal);padding:2px 0 2px 12px}
+.glance b{display:block;font-family:var(--display);font-size:26px;line-height:1.05;font-weight:700;font-variant-numeric:tabular-nums}
+.glance span{font-size:13px;color:var(--muted)}
+
+/* tables */
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:5px;margin:8px 0 16px}
+table{border-collapse:collapse;width:100%;font-size:14.5px}
+th,td{text-align:left;padding:9px 13px;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:#000;color:#fff;border-bottom:1px solid var(--line);font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;font-weight:600;white-space:nowrap}
+tbody tr:nth-child(even) td{background:var(--faint)}
+tr:last-child td{border-bottom:0}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+td:first-child{font-weight:600}
+.tag{font-family:var(--mono);font-size:10.5px;padding:1px 6px;border-radius:3px;border:1px solid var(--warn);color:var(--warn);white-space:nowrap;vertical-align:middle;font-weight:600}
+.pill{font-family:var(--mono);font-size:10.5px;padding:2px 7px;border-radius:999px;font-weight:600;white-space:nowrap}
+.pill.free{background:var(--good-soft);color:var(--good)}
+.pill.paid{background:var(--lime);color:var(--on-lime)}
+.pill.none{background:var(--faint);color:var(--muted);border:1px solid var(--line)}
+
+/* callouts */
+.call{display:grid;grid-template-columns:auto 1fr;gap:12px;padding:12px 15px;border-radius:5px;margin:14px 0;max-width:82ch;font-size:15px}
+.call .ic{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding-top:3px;white-space:nowrap}
+.call.warn{background:var(--warn-soft);border-left:3px solid var(--warn)}.call.warn .ic{color:var(--warn)}
+.call.ok{background:var(--good-soft);border-left:3px solid var(--good)}.call.ok .ic{color:var(--good)}
+.call.info{background:var(--signal-soft);border-left:3px solid var(--signal)}.call.info .ic{color:var(--signal)}
+
+/* roles cards */
+.roles{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;margin:10px 0 16px}
+.role{border:1px solid var(--line);border-radius:5px;padding:14px 15px;background:var(--page);display:flex;flex-direction:column;gap:7px;min-width:0}
+.role .hd{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.role h4{font-family:var(--display);font-weight:700;font-size:18px;text-transform:uppercase;margin:0;letter-spacing:.04em}
+.role p{font-size:14px;color:var(--muted);margin:0}
+
+/* flow steps */
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:0;margin:12px 0 16px;counter-reset:s}
+.step{position:relative;padding:14px 14px 14px 16px;border:1px solid var(--line);margin:0 -1px -1px 0;background:var(--page);counter-increment:s;min-width:0}
+.step::before{content:counter(s);font-family:var(--mono);font-weight:600;font-size:26px;line-height:1;color:var(--signal);display:block;margin-bottom:4px}
+.step b{display:block;font-size:15px;margin-bottom:2px}
+.step span{font-size:13.5px;color:var(--muted)}
+
+/* diagrams */
+.fig{border:1px solid var(--line);border-radius:5px;background:var(--faint);padding:10px;margin:10px 0 16px;overflow-x:auto}
+.fig svg{display:block;min-width:720px;width:100%;height:auto}
+.fig figcaption{font-size:12.5px;color:var(--muted);padding:6px 4px 0}
+svg text{font-family:var(--body);fill:var(--ink)}
+.bx{fill:var(--page);stroke:var(--line);stroke-width:1.2}
+.bx.core{fill:var(--army);stroke:var(--army)}
+.bx.core+text,.core-t{fill:var(--on-pitch)!important}
+.bx.sig{fill:var(--signal-soft);stroke:var(--signal)}
+.ln{stroke:var(--muted);stroke-width:1.3;fill:none}
+.ln.s{stroke:var(--signal);stroke-width:1.8}
+.lab{font-family:var(--mono);font-size:10px;letter-spacing:.1em;fill:var(--muted)!important;text-transform:uppercase}
+
+/* bars */
+.bars{display:grid;gap:9px;margin:10px 0 16px}
+.bar{display:grid;grid-template-columns:150px minmax(0,1fr) 90px;gap:12px;align-items:center;font-size:14px}
+@media (max-width:560px){.bar{grid-template-columns:100px minmax(0,1fr) 70px;gap:8px}}
+.bar .tr{height:18px;background:var(--faint);border:1px solid var(--line);border-radius:3px;position:relative;overflow:hidden}
+.bar .fl{position:absolute;inset:0 auto 0 0;background:var(--army);border-radius:2px}
+.bar .fl.hi{background:var(--lime)}
+.bar .rg{position:absolute;top:0;bottom:0;background:var(--lime);opacity:.4}
+.bar b{font-family:var(--mono);font-size:12.5px;text-align:right;font-weight:600}
+.gauge{display:flex;flex-wrap:wrap;gap:20px;align-items:center;margin:8px 0 14px}
+.gauge svg{width:190px;height:auto;flex:none}
+
+/* calculator */
+.calc{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:16px;align-items:start;margin:10px 0 16px}
+@media (max-width:780px){.calc{grid-template-columns:minmax(0,1fr)}}
+.panel{background:var(--faint);border:1px solid var(--line);border-radius:5px;padding:14px 16px}
+.panel h4{font-family:var(--display);font-weight:700;font-size:17px;text-transform:uppercase;margin:0 0 6px;letter-spacing:.02em}
+.row{display:grid;grid-template-columns:minmax(0,1fr) 96px;gap:10px;align-items:center;padding:6px 0;border-bottom:1px dashed var(--line);font-size:14.5px}
+.row:last-of-type{border-bottom:0}
+.row small{display:block;color:var(--muted);font-size:12px}
+.row input{width:100%;font:inherit;font-family:var(--mono);font-size:14px;background:var(--page);color:var(--ink);border:1px solid var(--line);border-radius:4px;padding:6px 8px;text-align:right}
+.out .lnr{display:flex;justify-content:space-between;gap:12px;padding:6px 0;border-bottom:1px dashed var(--line);font-size:14.5px}
+.out .lnr span:last-child{font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+.out .tot{font-weight:700;border-top:2px solid var(--signal);border-bottom:0;padding-top:10px;margin-top:4px}
+.out .tot span:last-child{font-size:26px;color:var(--good)}
+.out .neg span:last-child{color:var(--signal)!important}
+.reset{font:inherit;font-size:13px;background:transparent;color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:6px 14px;cursor:pointer;margin-top:10px}
+.reset:hover{border-color:var(--lime)}
+
+footer{max-width:1180px;margin:0 auto;padding-block:0 60px;color:var(--muted);font-size:13px}
+footer p{max-width:80ch}
+@media (prefers-reduced-motion:no-preference){#bar{transition:transform .08s linear}}
+</style>
+
+<div id="bar"></div>
+
+<header class="cover gut">
+  <div class="cin">
+    <div class="kicker">Platform document &middot; November 2026</div>
+    <h1>WePulse: how the <em>NIL</em> marketplace works</h1>
+    <p class="lede">What the platform does, how it earns, how it is built, what it costs to run and where each module stands, from users to cloud to AI.</p>
+    <div class="board" aria-label="Headline numbers">
+      <div><b>7</b><span>user roles</span></div>
+      <div><b>402</b><span>API operations</span></div>
+      <div><b>95</b><span>data entities</span></div>
+      <div><b>13</b><span>AI features</span></div>
+      <div><b>9.4K</b><span>automated tests</span></div>
+      <div><b>5</b><span>AWS accounts</span></div>
+    </div>
+    <div class="basis"><span><b>Basis</b> code-level review of the repositories and cloud definitions</span><span><b>Reviewed</b> 4 Nov 2026</span><span><b>Estimates</b> tagged <span class="tag">EST</span></span><span><b>Not measured</b> users, revenue, real AI spend</span></div>
+  </div>
+</header>
+
+<div class="shell gut">
+<aside id="nav" aria-label="Contents">
+  <div class="topbar"><span class="mk" aria-hidden="true"></span><b>WePulse</b>
+    <button class="navbtn" id="navbtn" type="button" aria-expanded="false" aria-controls="navpanel"><i id="curno">01</i><span class="nm" id="curname">Summary</span><span class="bg" id="pct">0%</span></button></div>
+  <div class="side" id="navpanel">
+    <div class="sh2"><span>Contents</span><button class="close" id="navclose" type="button" aria-label="Close contents">&#10005;</button></div>
+    <nav><ol id="toc"><li class="gl" aria-hidden="true">Overview</li><li><a href="#s1"><span class="no">01</span><span class="lbl">Summary</span></a></li><li><a href="#s2"><span class="no">02</span><span class="lbl">Users and roles</span></a></li><li class="gl" aria-hidden="true">Business</li><li><a href="#s3"><span class="no">03</span><span class="lbl">Business model and ROI</span></a></li><li><a href="#s4"><span class="no">04</span><span class="lbl">Subscriptions</span></a></li><li><a href="#s5"><span class="no">05</span><span class="lbl">Stakeholder value</span></a></li><li class="gl" aria-hidden="true">Platform</li><li><a href="#s6"><span class="no">06</span><span class="lbl">Architecture</span></a></li><li><a href="#s7"><span class="no">07</span><span class="lbl">Modules</span></a></li><li><a href="#s8"><span class="no">08</span><span class="lbl">Cloud providers</span></a></li><li><a href="#s9"><span class="no">09</span><span class="lbl">AI and tokens</span></a></li><li class="gl" aria-hidden="true">Features</li><li><a href="#s10"><span class="no">10</span><span class="lbl">FitMatch</span></a></li><li><a href="#s11"><span class="no">11</span><span class="lbl">P Score</span></a></li><li class="gl" aria-hidden="true">Foundations</li><li><a href="#s12"><span class="no">12</span><span class="lbl">Tech stack</span></a></li><li><a href="#s13"><span class="no">13</span><span class="lbl">Security</span></a></li><li><a href="#s14"><span class="no">14</span><span class="lbl">Estimates and open data</span></a></li></ol></nav>
+    <div class="read"><span id="fpct">0% read</span><div class="meter"><div id="meterfill"></div></div></div>
+  </div>
+</aside>
+<main>
+
+<section id="s1">
+  <div class="sh"><div class="no">01</div><h2>Summary</h2><p>One marketplace for athletes, families, coaches, brands, camps and agents.</p></div>
+  <div class="sb">
+    <p>WePulse is a marketplace and network for sports NIL (name, image and likeness) deals. Every role uses one account system to find each other, agree deals, sign contracts and get paid. An admin console runs verification, moderation and operations. A separate service, P Score, rates each athlete's marketability from 0 to 999.</p>
+    <div class="tw"><table>
+      <thead><tr><th>Topic</th><th>Summary</th></tr></thead>
+      <tbody>
+        <tr><td>Revenue</td><td>Paid memberships for Coach, Agent and Brand; a 10% fee added to each deal; agent commission inside the payment flow.</td></tr>
+        <tr><td>Price range</td><td>$150 to $1,500 per month by role. Annual plans are 20% cheaper.</td></tr>
+        <tr><td>Clients</td><td>React Native app for six roles, Next.js web hub, brand dashboard, admin console.</td></tr>
+        <tr><td>Core</td><td>One GraphQL API on Node 24 with MySQL and Redis; a separate P Score API on Postgres.</td></tr>
+        <tr><td>Cloud</td><td>AWS in five accounts, Google Cloud for push. About $1.1k per month <span class="tag">EST</span>.</td></tr>
+        <tr><td>AI</td><td>OpenAI gpt-4o through a budget-controlled gateway; thirteen features; about $0.005 to $0.05 per call <span class="tag">EST</span>.</td></tr>
+        <tr><td>FitMatch</td><td>3D body scan with about 70 measurements from a scanning partner, with age and consent controls.</td></tr>
+        <tr><td>Child privacy</td><td>Parental consent, custodial payouts, data minimisation and retention in the backend.</td></tr>
+      </tbody></table></div>
+  </div>
+</section>
+
+<section id="s2">
+  <div class="sh"><div class="no">02</div><h2>Users and roles</h2><p>Seven roles, one sign-in. The role sets screens, permissions and notifications.</p></div>
+  <div class="sb">
+    <div class="roles">
+      <div class="role"><div class="hd"><h4>Athlete</h4><span class="pill free">FREE</span></div><p>Feed, 24-hour stories, AI journey reels, profile with P Score trend, offers (view, counter, accept, decline), in-app contract signing, earnings and payout setup, events, agent discovery, parent linking, education portal, body scan.</p></div>
+      <div class="role"><div class="hd"><h4>Parent</h4><span class="pill free">FREE</span></div><p>Linked athletes; approvals for offers, events, connections and agents; consent controls for NIL, medical, travel, media and body scan; disclosure controls; payment history; child data revoke and delete.</p></div>
+      <div class="role"><div class="hd"><h4>Coach</h4><span class="pill paid">$199 / $499 / $999</span></div><p>Athlete discovery, groups, favorites, offers, camp invitations, events and meetings.</p></div>
+      <div class="role"><div class="hd"><h4>Brand</h4><span class="pill paid">$1,500</span></div><p>Athlete discovery with AI search, projects, opportunities and applicants, offers, deals, contracts, invoices and payments, pitch inbox, analytics, AI match, brief, pricing and ROI tools.</p></div>
+      <div class="role"><div class="hd"><h4>Camp</h4><span class="pill none">PRICE NOT SET</span></div><p>Create and archive events, attendance, applications and join requests, athlete pipeline with parent status, staff, invitations, analytics.</p></div>
+      <div class="role"><div class="hd"><h4>Agent</h4><span class="pill paid">$150</span></div><p>Client invites and requests, deals and offers, representation contracts, earnings, AI pitch generator, brand discovery, deal scout, portfolio analyzer.</p></div>
+      <div class="role"><div class="hd"><h4>Admin</h4><span class="pill none">INTERNAL</span></div><p>Users, verification queues, moderation and appeals, disputes, analytics, P Score administration, education content, AI controls, deployments, audit.</p></div>
+    </div>
+    <div class="glance">
+      <div><b>216</b><span>mobile screen files</span></div>
+      <div><b>48 to 71</b><span>stack screens per role</span></div>
+      <div><b>5</b><span>tabs per role</span></div>
+      <div><b>~39</b><span>admin console screens</span></div>
+    </div>
+    <p>By role, screen files are: Athlete 67, Brand 35, Camp 22, Agent 22, Parent 20, Coach 20, shared 11, sign-in 9, child-privacy 6. Nearly every screen reads and writes live data.</p>
+    <div class="call warn"><span class="ic">Status</span><div>DocuSign signing screens, share links and the audio picker are off in the app. Athlete two-factor sign-in was removed. Under-13 registration and the parental-consent screens are off in the mobile app while the backend controls exist. Body-scan access in the app depends on age-verification screens that are not yet built. Education content was still in draft in late October. The app is English only.</div></div>
+  </div>
+</section>
+
+<section id="s3">
+  <div class="sh"><div class="no">03</div><h2>Business model and ROI</h2><p>Three revenue levers, a measurable cost base and a what-if model.</p></div>
+  <div class="sb">
+    <h3><span class="n">3.1</span>Revenue levers</h3>
+    <div class="tw"><table>
+      <thead><tr><th>Lever</th><th>How it works</th><th>Rate</th></tr></thead>
+      <tbody>
+        <tr><td>Memberships</td><td>Monthly or annual subscription through Stripe Checkout for Coach, Agent and Brand.</td><td>$150 to $1,500 per month</td></tr>
+        <tr><td>Platform fee</td><td>Added on top of the deal: the brand pays deal plus fee; the athlete receives the full deal amount less any agent commission.</td><td>10% default</td></tr>
+        <tr><td>Agent commission</td><td>Split from the athlete's payout on deals with an agent, per the representation contract.</td><td>10% default</td></tr>
+      </tbody></table></div>
+
+    <h3><span class="n">3.2</span>How a payment flows</h3>
+    <div class="steps">
+      <div class="step"><b>Contract executed</b><span>Brand and athlete have signed.</span></div>
+      <div class="step"><b>Brand pays</b><span>Deal price plus 10% fee, by card.</span></div>
+      <div class="step"><b>Funds route</b><span>No agent: straight to the athlete. With agent: held, then split.</span></div>
+      <div class="step"><b>Webhook confirms</b><span>Signed and idempotent; payment and invoice update.</span></div>
+      <div class="step"><b>Payout</b><span>Athlete, agent or custodial parent account.</span></div>
+    </div>
+    <ul class="l">
+      <li><b>Minors:</b> payouts for athletes under 18 go to a custodial parent account and payments are blocked until parental consent is verified.</li>
+      <li><b>Refunds:</b> full or partial; a refund reverses the transfers, including the proportional commission.</li>
+      <li><b>Saved cards:</b> customers can save, set a default and remove payment methods.</li>
+    </ul>
+
+    <h3><span class="n">3.3</span>Worked example: one deal</h3>
+    <div class="tw"><table>
+      <thead><tr><th>Step</th><th class="n">No agent</th><th class="n">10% agent commission</th></tr></thead>
+      <tbody>
+        <tr><td>Deal price</td><td class="n">$1,000</td><td class="n">$1,000</td></tr>
+        <tr><td>Platform fee added (10%)</td><td class="n">$100</td><td class="n">$100</td></tr>
+        <tr><td>Brand pays</td><td class="n">$1,100</td><td class="n">$1,100</td></tr>
+        <tr><td>Agent receives</td><td class="n">n/a</td><td class="n">$100</td></tr>
+        <tr><td>Athlete receives</td><td class="n">$1,000</td><td class="n">$900</td></tr>
+        <tr><td>Platform keeps, before card fees</td><td class="n">$100</td><td class="n">$100</td></tr>
+      </tbody></table></div>
+
+    <h3><span class="n">3.4</span>Monthly cost base <span class="tag">EST</span></h3>
+    <div class="bars" id="costbars">
+      <div class="bar"><span>Production</span><div class="tr"><div class="rg" style="left:26.7%;width:13.3%"></div><div class="fl" style="width:26.7%"></div></div><b>$400-600</b></div>
+      <div class="bar"><span>Staging</span><div class="tr"><div class="rg" style="left:16.3%;width:6.4%"></div><div class="fl" style="width:16.3%"></div></div><b>$245-340</b></div>
+      <div class="bar"><span>Development</span><div class="tr"><div class="rg" style="left:16.3%;width:11.7%"></div><div class="fl" style="width:16.3%"></div></div><b>$245-420</b></div>
+      <div class="bar"><span>Shared</span><div class="tr"><div class="rg" style="left:8.3%;width:2.3%"></div><div class="fl" style="width:8.3%"></div></div><b>$125-160</b></div>
+      <div class="bar"><span>Management</span><div class="tr"><div class="fl" style="width:.4%"></div></div><b>$3-10</b></div>
+      <div class="bar"><span><b style="font-family:var(--body);font-size:14px;text-align:left;font-weight:600">All AWS</b></span><div class="tr"><div class="rg" style="left:68%;width:34%;display:none"></div><div class="fl hi" style="width:76.7%"></div></div><b>$1.0-1.5k</b></div>
+    </div>
+    <p style="font-size:13.5px;color:var(--muted)">Bar length is the low end, shaded segment is the range to the high end, scaled to $1,500. Estimated from infrastructure definitions and list prices; AI usage and other vendor plans are on top.</p>
+    <div class="tw"><table>
+      <thead><tr><th>Cost line</th><th>Basis</th></tr></thead>
+      <tbody>
+        <tr><td>Production</td><td>2 backend servers, 2 load balancers and 1 network balancer, multi-zone MySQL, Postgres, Redis, 3 Fargate services, firewall, audit tools</td></tr>
+        <tr><td>Staging and development</td><td>Same shape with single instances; development may also pay extended support on an older database version</td></tr>
+        <tr><td>Shared</td><td>Admin console, database, private links, image registry</td></tr>
+        <tr><td>Google Cloud</td><td>Push notifications and directory lookup, close to $0</td></tr>
+        <tr><td>Usage based</td><td>AI model calls, Stripe processing, DocuSign, FitMatch, Apify, Twilio, email, Sentry, PostHog, Expo, GitHub (plans not in code)</td></tr>
+      </tbody></table></div>
+
+    <h3><span class="n">3.5</span>ROI what-if model</h3>
+    <p>The model uses real price points and the cost base above. The starting inputs are placeholders. Replace them with production figures.</p>
+    <div class="calc">
+      <div class="panel">
+        <h4>Scenario inputs</h4>
+        <div class="row"><label for="i_brand">Brand members<small>$1,500 per month</small></label><input id="i_brand" type="number" min="0" value="5"></div>
+        <div class="row"><label for="i_cs">Coach, Small Program<small>$199 per month</small></label><input id="i_cs" type="number" min="0" value="10"></div>
+        <div class="row"><label for="i_cm">Coach, School<small>$499 per month</small></label><input id="i_cm" type="number" min="0" value="3"></div>
+        <div class="row"><label for="i_cc">Coach, College<small>$999 per month</small></label><input id="i_cc" type="number" min="0" value="1"></div>
+        <div class="row"><label for="i_ag">Agent members<small>$150 per month</small></label><input id="i_ag" type="number" min="0" value="10"></div>
+        <div class="row"><label for="i_ann">Share on annual plans (%)<small>annual is 20% cheaper</small></label><input id="i_ann" type="number" min="0" max="100" value="30"></div>
+        <div class="row"><label for="i_deals">Deals paid per month</label><input id="i_deals" type="number" min="0" value="20"></div>
+        <div class="row"><label for="i_size">Average deal size ($)</label><input id="i_size" type="number" min="0" value="1500"></div>
+        <div class="row"><label for="i_ai">AI calls per month<small>about 3K in and 1.5K out tokens each</small></label><input id="i_ai" type="number" min="0" value="10000"></div>
+        <div class="row"><label for="i_infra">Cloud cost per month ($)</label><input id="i_infra" type="number" min="0" value="1150"></div>
+        <div class="row"><label for="i_other">Other vendors and staff ($)<small>not known</small></label><input id="i_other" type="number" min="0" value="0"></div>
+        <button class="reset" id="reset" type="button">Reset to defaults</button>
+      </div>
+      <div class="panel out" aria-live="polite">
+        <h4>Monthly result</h4>
+        <div class="lnr"><span>Membership revenue</span><span id="o_mem"></span></div>
+        <div class="lnr"><span>Platform fee revenue</span><span id="o_fee"></span></div>
+        <div class="lnr"><span>Total revenue</span><span id="o_rev"></span></div>
+        <div class="lnr"><span>Cloud</span><span id="o_infra"></span></div>
+        <div class="lnr"><span>AI model usage</span><span id="o_ai"></span></div>
+        <div class="lnr"><span>Other vendors and staff</span><span id="o_other"></span></div>
+        <div class="lnr tot" id="o_netline"><span>Net per month</span><span id="o_net"></span></div>
+        <div class="lnr"><span>Net per year</span><span id="o_yr"></span></div>
+        <div class="lnr"><span>Brand members that cover cloud and AI</span><span id="o_be"></span></div>
+        <p style="color:var(--muted);font-size:12.5px;margin:10px 0 0">Excludes card-processing fees, vendor plans, taxes and agent commission passed to agents.</p>
+      </div>
+    </div>
+
+    <h3><span class="n">3.6</span>Known versus still needed</h3>
+    <div class="tw"><table>
+      <thead><tr><th>Known from code</th><th>Needed from production or finance</th></tr></thead>
+      <tbody>
+        <tr><td>Membership prices, annual discount, 10% fee, commission defaults</td><td>Active members per role, conversion to paid, churn</td></tr>
+        <tr><td>Cloud cost estimate by account</td><td>Real AWS bill by service</td></tr>
+        <tr><td>AI token caps and list-price cost per call</td><td>Actual monthly AI tokens and spend (logged per call)</td></tr>
+        <tr><td>Payment, invoice and contract workflows</td><td>Deals per month, average deal size, payout volume</td></tr>
+        <tr><td>Vendor list</td><td>Plan prices for Stripe, DocuSign, gateway, FitMatch, Apify, Twilio</td></tr>
+      </tbody></table></div>
+    <div class="call warn"><span class="ic">Limits</span><div>Funds reach the athlete when the card is charged, so the platform does not hold escrow; the escrow screens track a ledger. The fee in the admin settings does not change the charged fee, which comes from configuration (10% default). A Stripe payment does not mark the offer or contract completed; recording a payment does. Dispute resolution records a refund amount but does not move money.</div></div>
+  </div>
+</section>
+
+<section id="s4">
+  <div class="sh"><div class="no">04</div><h2>Subscriptions</h2><p>Memberships for Coach, Agent and Brand, sold through Stripe Checkout.</p></div>
+  <div class="sb">
+    <h3><span class="n">4.1</span>Catalog</h3>
+    <div class="tw"><table>
+      <thead><tr><th>Role and tier</th><th class="n">Monthly</th><th class="n">Annual (20% off)</th><th>Product key</th></tr></thead>
+      <tbody>
+        <tr><td>Coach, Small Program</td><td class="n">$199</td><td class="n">$1,910.40</td><td>pulse_coach_small</td></tr>
+        <tr><td>Coach, School</td><td class="n">$499</td><td class="n">$4,790.40</td><td>pulse_coach_school</td></tr>
+        <tr><td>Coach, College</td><td class="n">$999</td><td class="n">$9,590.40</td><td>pulse_coach_college</td></tr>
+        <tr><td>Agent</td><td class="n">$150</td><td class="n">$1,440</td><td>pulse_agent</td></tr>
+        <tr><td>Brand</td><td class="n">$1,500</td><td class="n">$14,400</td><td>pulse_brand</td></tr>
+        <tr><td>Camp</td><td colspan="3">Role requires a membership; no product or price defined yet</td></tr>
+        <tr><td>Athlete, Parent</td><td colspan="3">Free</td></tr>
+      </tbody></table></div>
+    <h3><span class="n">4.2</span>Lifecycle</h3>
+    <div class="steps">
+      <div class="step"><b>Checkout</b><span>Pick tier and period in Stripe Checkout.</span></div>
+      <div class="step"><b>Webhook</b><span>Membership recorded; sign-in group added, with three retries.</span></div>
+      <div class="step"><b>Entitled</b><span>Active and trialing members. Past due is not, with no grace period.</span></div>
+      <div class="step"><b>Lapse</b><span>Group removed. Sessions run until they expire; profile data stays.</span></div>
+      <div class="step"><b>Portal</b><span>Change plan, card or cancel at any time.</span></div>
+    </div>
+    <h3><span class="n">4.3</span>Where it is checked</h3>
+    <div class="tw"><table>
+      <thead><tr><th>Point</th><th>Behavior</th></tr></thead>
+      <tbody>
+        <tr><td>Role assignment</td><td>A paid role cannot be assigned without an active membership.</td></tr>
+        <tr><td>Profile creation</td><td>The first profile for a paid role needs an active membership.</td></tr>
+        <tr><td>Ongoing use</td><td>Not checked per operation; feature access does not change with the plan.</td></tr>
+        <tr><td>Brand web</td><td>Full membership screens with status polling.</td></tr>
+        <tr><td>Mobile</td><td>No billing screens; paid roles check out on the web.</td></tr>
+      </tbody></table></div>
+    <div class="call ok"><span class="ic">Ready</span><div>Catalog, checkout, webhooks, portal and sign-in groups are in place. Tiered entitlements, usage or seat limits, a Camp price and a mobile paywall are the next steps.</div></div>
+  </div>
+</section>
+
+<section id="s5">
+  <div class="sh"><div class="no">05</div><h2>Stakeholder value</h2><p>What each party gains, pays and can be measured on.</p></div>
+  <div class="sb">
+    <div class="tw"><table>
+      <thead><tr><th>Stakeholder</th><th>What they gain</th><th>What they pay</th><th>Indicators to track</th></tr></thead>
+      <tbody>
+        <tr><td>Athlete</td><td>Verified profile, P Score visibility, access to brand, agent and coach deals, payouts, education and body-scan data.</td><td>Free</td><td>Profiles completed, offers received, deals paid, payout setup rate</td></tr>
+        <tr><td>Parent</td><td>Oversight and legal consent for minors; approvals for offers, events, connections and agents.</td><td>Free</td><td>Consents completed, approval turnaround</td></tr>
+        <tr><td>Brand</td><td>Search across athletes, project pipelines, offers to payments in one place, AI tools, PDF invoices.</td><td>$1,500 per month plus 10% fee</td><td>Active brands, offers sent, deals closed, spend per brand</td></tr>
+        <tr><td>Agent</td><td>Roster management, representation contracts, commission on payouts, pitches, AI deal scouting.</td><td>$150 per month</td><td>Clients linked, pitches sent, commission earned</td></tr>
+        <tr><td>Coach</td><td>Recruiting discovery, groups, outreach, events and meetings.</td><td>$199 to $999 per month</td><td>Searches, connection requests, accepted connections</td></tr>
+        <tr><td>Camp</td><td>Event creation, applications, check-in and athlete pipeline.</td><td>Not set</td><td>Events, applications, attendance</td></tr>
+        <tr><td>Operator</td><td>Verification, moderation, disputes, analytics, P Score tuning, content tools, AI switches, audit.</td><td>Internal cost</td><td>Queue time, flags resolved, disputes closed</td></tr>
+        <tr><td>The business</td><td>Membership revenue, a fee on every deal, a proprietary score, one platform for both sides of the deal.</td><td>n/a</td><td>Recurring revenue, gross deal value, take rate, retention</td></tr>
+      </tbody></table></div>
+  </div>
+</section>
+
+<section id="s6">
+  <div class="sh"><div class="no">06</div><h2>Architecture</h2><p>One API is the source of truth. Every client, and the score engine, connect to it.</p></div>
+  <div class="sb">
+    <h3><span class="n">6.1</span>System context</h3>
+    <figure class="fig" style="margin-inline:0">
+      <svg viewBox="0 0 940 400" role="img" aria-label="System context diagram: four clients connect to the GraphQL API, which uses MySQL, Redis, the P Score API and external vendors">
+        <text class="lab" x="20" y="22">Clients</text><text class="lab" x="330" y="22">Core</text><text class="lab" x="640" y="22">Data and services</text>
+        <g><rect class="bx" x="20" y="40" width="190" height="52" rx="5"/><text x="115" y="72" text-anchor="middle" font-size="15" font-weight="600">Mobile app</text>
+        <rect class="bx" x="20" y="112" width="190" height="52" rx="5"/><text x="115" y="144" text-anchor="middle" font-size="15" font-weight="600">Web hub</text>
+        <rect class="bx" x="20" y="184" width="190" height="52" rx="5"/><text x="115" y="216" text-anchor="middle" font-size="15" font-weight="600">Brand dashboard</text>
+        <rect class="bx" x="20" y="256" width="190" height="52" rx="5"/><text x="115" y="288" text-anchor="middle" font-size="15" font-weight="600">Admin console</text></g>
+        <path class="ln s" d="M210 66 H300 M210 138 H300 M210 210 H300 M210 282 H300"/>
+        <rect class="bx core" x="300" y="100" width="220" height="150" rx="6"/>
+        <text class="core-t" x="410" y="160" text-anchor="middle" font-size="20" font-weight="700">GraphQL API</text>
+        <text class="core-t" x="410" y="184" text-anchor="middle" font-size="12.5" style="opacity:.8">permissions, payments, chat, jobs</text>
+        <text class="core-t" x="410" y="204" text-anchor="middle" font-size="12.5" style="opacity:.8">Elastic Beanstalk</text>
+        <rect class="bx" x="300" y="290" width="220" height="64" rx="6"/><text x="410" y="318" text-anchor="middle" font-size="15" font-weight="600">P Score API</text><text x="410" y="338" text-anchor="middle" font-size="12" fill="var(--muted)">ECS Fargate</text>
+        <path class="ln" d="M410 250 V290"/><path class="ln" d="M210 282 C260 330 270 322 300 322"/>
+        <g><rect class="bx" x="640" y="36" width="130" height="40" rx="5"/><text x="705" y="61" text-anchor="middle" font-size="14">MySQL 8.4</text>
+        <rect class="bx" x="640" y="86" width="130" height="40" rx="5"/><text x="705" y="111" text-anchor="middle" font-size="14">Redis</text>
+        <rect class="bx" x="640" y="296" width="130" height="40" rx="5"/><text x="705" y="321" text-anchor="middle" font-size="14">Postgres 16</text></g>
+        <path class="ln" d="M520 130 H580 V56 H640 M580 106 H640"/><path class="ln" d="M520 322 H640"/>
+        <g><rect class="bx sig" x="790" y="36" width="130" height="34" rx="5"/><text x="855" y="58" text-anchor="middle" font-size="13.5">Stripe</text>
+        <rect class="bx sig" x="790" y="78" width="130" height="34" rx="5"/><text x="855" y="100" text-anchor="middle" font-size="13.5">DocuSign</text>
+        <rect class="bx sig" x="790" y="120" width="130" height="34" rx="5"/><text x="855" y="142" text-anchor="middle" font-size="13.5">OpenAI gateway</text>
+        <rect class="bx sig" x="790" y="162" width="130" height="34" rx="5"/><text x="855" y="184" text-anchor="middle" font-size="13.5">FitMatch</text>
+        <rect class="bx sig" x="790" y="204" width="130" height="34" rx="5"/><text x="855" y="226" text-anchor="middle" font-size="13.5">Cognito sign-in</text>
+        <rect class="bx sig" x="790" y="246" width="130" height="34" rx="5"/><text x="855" y="268" text-anchor="middle" font-size="13.5">Email, SMS, push</text></g>
+        <path class="ln" d="M520 150 H740 V53 H790 M740 95 H790 M740 137 H790 M740 179 H790 M740 221 H790 M740 263 H790"/>
+        <text class="lab" x="790" y="318">Score data sources</text>
+        <rect class="bx" x="790" y="326" width="130" height="34" rx="5"/><text x="855" y="348" text-anchor="middle" font-size="12.5">Social, sports, wiki</text>
+        <path class="ln" d="M770 316 H790 V343"/>
+      </svg>
+      <figcaption>Admin also reaches P Score directly over private links.</figcaption>
+    </figure>
+
+    <h3><span class="n">6.2</span>Components</h3>
+    <div class="tw"><table>
+      <thead><tr><th>Component</th><th>Runs on</th><th>Role</th></tr></thead>
+      <tbody>
+        <tr><td>GraphQL API</td><td>AWS Elastic Beanstalk, 2 to 4 instances in production</td><td>Single source of truth: permissions, payments, contracts, chat, notifications, jobs.</td></tr>
+        <tr><td>Mobile app</td><td>Expo and React Native, over-the-air updates</td><td>Six consumer roles with role-specific navigation.</td></tr>
+        <tr><td>Web hub</td><td>Static Next.js on S3 and CloudFront</td><td>Web client for athlete, parent, coach, camp and agent.</td></tr>
+        <tr><td>Brand dashboard</td><td>Static React app on S3 and CloudFront</td><td>Discovery, offers, contracts, payments, membership.</td></tr>
+        <tr><td>Admin console</td><td>ECS Fargate, shared account</td><td>Operations for all three environments, with its own Postgres for deployment tools.</td></tr>
+        <tr><td>P Score API</td><td>ECS Fargate, Postgres 16</td><td>Score calculation, history, formula versions.</td></tr>
+        <tr><td>Marketing site</td><td>ECS Fargate</td><td>Public pages, public P Score, sign-up entry.</td></tr>
+        <tr><td>Education video</td><td>S3, queue-driven Fargate transcode, CloudFront</td><td>Education content delivery.</td></tr>
+      </tbody></table></div>
+
+    <h3><span class="n">6.3</span>Runtime behavior</h3>
+    <ul class="l">
+      <li><b>Sign-in:</b> every client signs in with Cognito; the API verifies the token and reads the user's groups.</li>
+      <li><b>Permissions:</b> every operation has an explicit rule, anything without one is denied, and a build check fails if a rule is missing.</li>
+      <li><b>Real time:</b> WebSocket chat and presence plus a notification subscription, backed by Redis publish and subscribe.</li>
+      <li><b>Background work:</b> about 14 scheduled jobs guarded by Redis locks, plus workers for journey reels and video transcode.</li>
+      <li><b>Resilience:</b> circuit breakers on vendor calls, retries, idempotent webhooks and rate limits.</li>
+      <li><b>Private networking:</b> the API reaches P Score over private DNS; the admin console uses private links.</li>
+    </ul>
+
+    <h3><span class="n">6.4</span>Environments</h3>
+    <div class="tw"><table>
+      <thead><tr><th>Environment</th><th>Account</th><th>Address</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>Production</td><td>prod</td><td>api.wepulse.io</td><td>Multi-zone MySQL, 2+ backend instances, firewall, audit tooling.</td></tr>
+        <tr><td>Staging</td><td>stg</td><td>api-stg.wepulse.io</td><td>Own database, cache and sign-in pool; gated website; sandboxed email.</td></tr>
+        <tr><td>Development</td><td>dev</td><td>api-dev.wepulse.io</td><td>Same shape as staging.</td></tr>
+        <tr><td>Shared</td><td>shared</td><td>admin.wepulse.io</td><td>Admin console, image registry, build artifacts, sign-in gates.</td></tr>
+        <tr><td>Management</td><td>mgmt</td><td>n/a</td><td>Organization policies, identity center, organization audit trail.</td></tr>
+      </tbody></table></div>
+
+    <h3><span class="n">6.5</span>Delivery pipeline</h3>
+    <div class="steps">
+      <div class="step"><b>Version tag</b><span>A tag starts the release.</span></div>
+      <div class="step"><b>Build once</b><span>One immutable build.</span></div>
+      <div class="step"><b>Deploy to dev</b><span>Automatic.</span></div>
+      <div class="step"><b>Promote to staging</b><span>Same build, manual trigger.</span></div>
+      <div class="step"><b>Promote to production</b><span>Same build; rollback workflow ready.</span></div>
+    </div>
+    <p>Each account has its own short-lived deploy identity from GitHub, so no long-lived cloud keys are stored. Infrastructure changes are applied locally after review.</p>
+  </div>
+</section>
+
+<section id="s7">
+  <div class="sh"><div class="no">07</div><h2>Modules</h2><p>Backend domains, admin console, brand dashboard and the score API.</p></div>
+  <div class="sb">
+    <div class="glance">
+      <div><b>402</b><span>operations: 175 queries, 226 mutations, 1 subscription</span></div>
+      <div><b>153</b><span>database migrations</span></div>
+      <div><b>~124</b><span>admin operations</span></div>
+      <div><b>131</b><span>in-app notification types</span></div>
+    </div>
+    <h3><span class="n">7.1</span>Backend domains</h3>
+    <div class="tw"><table>
+      <thead><tr><th>Domain</th><th>Contents</th></tr></thead>
+      <tbody>
+        <tr><td>Identity</td><td>Sign-up sync, role assignment, role profiles, suspension, account deletion.</td></tr>
+        <tr><td>Athlete</td><td>Profile, media, journey reels, recruiting-profile import, birthdate attestation.</td></tr>
+        <tr><td>Parent and consent</td><td>Parent links, consent flags, verified parental consent by e-signature, child revoke and delete.</td></tr>
+        <tr><td>Coach and camp</td><td>Profiles, groups, events, applications, staff, invitations, attendance.</td></tr>
+        <tr><td>Brand</td><td>Projects, opportunities, offers and templates, AI match runs, favorites.</td></tr>
+        <tr><td>Offers, contracts, deals</td><td>Negotiation, contract types (NIL, endorsement, appearance, content, representation), signatures, e-signature envelopes.</td></tr>
+        <tr><td>Agents</td><td>Representation links, pitches, commission and earnings.</td></tr>
+        <tr><td>Payments</td><td>Stripe Connect, invoices, refunds, payment history, memberships.</td></tr>
+        <tr><td>Social and chat</td><td>Feed, stories, circle, follows, chat rooms and presence.</td></tr>
+        <tr><td>Notifications</td><td>In-app, push, email and SMS with preferences: 57 email, 37 push and 6 SMS templates.</td></tr>
+        <tr><td>Verification and moderation</td><td>Verification requests with documents, content flags and appeals.</td></tr>
+        <tr><td>Education</td><td>Content management with revisions, publishing and a content delivery network.</td></tr>
+        <tr><td>Administration</td><td>Admin operations and an audit log with 96 action types.</td></tr>
+        <tr><td>AI, FitMatch, P Score client</td><td>13 AI features; body-scan sessions, results and deletion; score sync and read.</td></tr>
+      </tbody></table></div>
+    <h3><span class="n">7.2</span>Admin console</h3>
+    <p>About 39 screens: user management (suspend, activate, bulk actions, activity), verification queue (claim, approve, reject, request information, escalate), onboarding, moderation with appeals and flagging rules, offer disputes, analytics (NIL, engagement, sports, geographic), P Score administration, education editor with revisions and publishing, AI feature controls and usage, deployment console, audit logs, system health, announcements and settings.</p>
+    <h3><span class="n">7.3</span>Brand dashboard</h3>
+    <p>24 signed-in routes: athlete discovery with AI search and favorites; AI match engine, campaign briefs, pricing intelligence and ROI predictor; brand projects and pipeline; offers and templates; opportunities and applicants; contracts and deals; invoices, record payment, refund, Stripe payment and history; connections; settings with billing and verification; membership.</p>
+    <h3><span class="n">7.4</span>P Score API</h3>
+    <p>Public: health, formula, benchmarks, leaderboard, score by slug, athlete trend. Service access: calculate, submissions, lookup by email, change feed, sync. Admin: formula versions, overrides, preview, recalculation, audit.</p>
+  </div>
+</section>
+
+<section id="s8">
+  <div class="sh"><div class="no">08</div><h2>Cloud providers</h2><p>AWS runs the platform, Google handles push, vendors supply specialist services.</p></div>
+  <div class="sb">
+    <h3><span class="n">8.1</span>AWS inventory</h3>
+    <div class="tw"><table>
+      <thead><tr><th>Service</th><th>Use</th><th>Production sizing</th></tr></thead>
+      <tbody>
+        <tr><td>Elastic Beanstalk, EC2</td><td>Backend API</td><td>t3.medium, 2 to 4 instances, immutable deploys</td></tr>
+        <tr><td>RDS MySQL 8.4</td><td>Main database</td><td>db.t4g.small, multi-zone, 7-day backups, deletion protection</td></tr>
+        <tr><td>RDS Postgres 16</td><td>P Score; admin console</td><td>db.t3.small, 7-day backups</td></tr>
+        <tr><td>ElastiCache Redis 7.1</td><td>Queues, locks, rate limits, chat</td><td>cache.t3.small, one node</td></tr>
+        <tr><td>ECS Fargate</td><td>P Score API and site, admin, transcode, marketing site</td><td>0.25 to 1 vCPU tasks</td></tr>
+        <tr><td>S3 and CloudFront</td><td>Media, legal, verification, child-privacy and export files; web apps and video</td><td>5 data buckets, 4 distributions</td></tr>
+        <tr><td>Cognito</td><td>Sign-in for clients and admin gates</td><td>A pool per environment</td></tr>
+        <tr><td>SES, SNS, SQS</td><td>Email, SMS, queues</td><td>Sandboxed outside production</td></tr>
+        <tr><td>WAF</td><td>Firewall on the API load balancer</td><td>Known bad inputs; 2,000 requests per 5 minutes per IP</td></tr>
+        <tr><td>KMS, Secrets Manager</td><td>Keys and secrets</td><td>Dedicated keys for sensitive buckets</td></tr>
+        <tr><td>CloudTrail, GuardDuty, Config</td><td>Audit and detection</td><td>Production plus organization trail</td></tr>
+        <tr><td>Route 53</td><td>DNS for wepulse.io</td><td>One zone, about 52 records</td></tr>
+      </tbody></table></div>
+    <h3><span class="n">8.2</span>Other providers</h3>
+    <div class="tw"><table>
+      <thead><tr><th>Provider</th><th>Used for</th><th>Cost model</th></tr></thead>
+      <tbody>
+        <tr><td>Google Cloud, Firebase</td><td>Push delivery; directory lookup for the admin gate</td><td>Free tiers</td></tr>
+        <tr><td>OpenAI via Axemere gateway</td><td>AI features</td><td>Per token; gateway enforces budgets</td></tr>
+        <tr><td>Stripe</td><td>Memberships, deal payments, payouts</td><td>Fees per transaction</td></tr>
+        <tr><td>DocuSign</td><td>E-signature, parental consent</td><td>Per envelope or plan</td></tr>
+        <tr><td>FitMatch</td><td>Body scan</td><td>Vendor fee, not in code</td></tr>
+        <tr><td>Apify, TheSportsDB, Wikipedia</td><td>P Score inputs</td><td>Per run for Apify</td></tr>
+        <tr><td>Twilio</td><td>SMS from the score service</td><td>About $0.008 per message</td></tr>
+        <tr><td>Sentry, PostHog, Expo EAS, GitHub</td><td>Errors, analytics, mobile builds, source and CI</td><td>Plans</td></tr>
+      </tbody></table></div>
+  </div>
+</section>
+
+<section id="s9">
+  <div class="sh"><div class="no">09</div><h2>AI and tokens</h2><p>Thirteen features through one controlled pipeline.</p></div>
+  <div class="sb">
+    <h3><span class="n">9.1</span>How a call is made</h3>
+    <div class="steps">
+      <div class="step"><b>Privacy gate</b><span>Blocked if a minor's family has not allowed AI disclosure.</span></div>
+      <div class="step"><b>Feature switch</b><span>Per-feature admin toggle and a global kill switch.</span></div>
+      <div class="step"><b>Model call</b><span>gpt-4o via the gateway, behind a circuit breaker.</span></div>
+      <div class="step"><b>Output check</b><span>Response validated against a schema.</span></div>
+      <div class="step"><b>Usage log</b><span>Tokens and estimated cost stored per call.</span></div>
+    </div>
+    <p>Budgets are enforced at the gateway. If the gateway token is missing, the code calls OpenAI directly and raises an alert, which bypasses gateway budget tracking.</p>
+    <h3><span class="n">9.2</span>Features and token caps</h3>
+    <div class="bars">
+      <div class="bar"><span>Search</span><div class="tr"><div class="fl" style="width:12.5%"></div></div><b>512</b></div>
+      <div class="bar"><span>Assistant chat</span><div class="tr"><div class="fl" style="width:25%"></div></div><b>1,024</b></div>
+      <div class="bar"><span>ROI predictor</span><div class="tr"><div class="fl" style="width:36.6%"></div></div><b>1,500</b></div>
+      <div class="bar"><span>Deal scout</span><div class="tr"><div class="fl" style="width:80%"></div></div><b>3,276</b></div>
+      <div class="bar"><span>Other 9 features</span><div class="tr"><div class="fl hi" style="width:100%"></div></div><b>4,096</b></div>
+    </div>
+    <div class="tw"><table>
+      <thead><tr><th>Feature</th><th>Used by</th><th class="n">Max output</th></tr></thead>
+      <tbody>
+        <tr><td>Assistant chat</td><td>All roles</td><td class="n">1,024</td></tr>
+        <tr><td>Natural-language athlete search</td><td>Brand, coach</td><td class="n">512</td></tr>
+        <tr><td>Offer analysis, offer draft</td><td>Athlete, agent, brand</td><td class="n">4,096</td></tr>
+        <tr><td>Agent pitch, contract review</td><td>Agent, athlete</td><td class="n">4,096</td></tr>
+        <tr><td>Campaign brief generator</td><td>Brand</td><td class="n">4,096</td></tr>
+        <tr><td>Deal scout (up to 10 athletes)</td><td>Brand, agent</td><td class="n">3,276</td></tr>
+        <tr><td>Portfolio analysis</td><td>Agent</td><td class="n">4,096</td></tr>
+        <tr><td>Athlete match engine, deal pricing</td><td>Brand</td><td class="n">4,096</td></tr>
+        <tr><td>Campaign ROI predictor</td><td>Brand</td><td class="n">1,500</td></tr>
+        <tr><td>Journey reel clip analysis (background worker)</td><td>Athlete</td><td class="n">4,096</td></tr>
+      </tbody></table></div>
+    <h3><span class="n">9.3</span>Approximate usage <span class="tag">EST</span></h3>
+    <div class="glance">
+      <div><b>1 to 5K</b><span>input tokens per call</span></div>
+      <div><b>0.3 to 4K</b><span>output tokens per call</span></div>
+      <div><b>$0.005 to $0.05</b><span>cost per call</span></div>
+      <div><b id="tok">45M</b><span>tokens per month in the model in 3.5</span></div>
+    </div>
+    <p>Cost uses the list prices in the code: $0.0025 per 1,000 input tokens and $0.01 per 1,000 output tokens.</p>
+    <h3><span class="n">9.4</span>Controls</h3>
+    <ul class="l">
+      <li>Per-minute limits in production: chat 20, search 15, offer analysis, draft, pitch and brief 10, contract review 5; other queries share 60 per minute. Global limits are 100 requests and 50 mutations per minute per caller.</li>
+      <li>Brand AI on an athlete needs the athlete to be eligible or to have a prior relationship.</li>
+      <li>Admins can switch features on and off and read usage statistics.</li>
+      <li>There is no per-user daily or monthly token quota in the code; limits are per minute and at the gateway.</li>
+    </ul>
+    <div class="call info"><span class="ic">Exact data</span><div>Every call is stored with tokens and cost, so real monthly usage is one query on the usage table. That query has not been run.</div></div>
+  </div>
+</section>
+
+<section id="s10">
+  <div class="sh"><div class="no">10</div><h2>FitMatch</h2><p>A 3D body scan inside the athlete profile.</p></div>
+  <div class="sb">
+    <p>FitMatch produces about 70 athletic measurements, such as wingspan, height, predicted adult height, lean mass, body-fat percentage, BMI and limb circumferences, plus a rotatable 3D model. It supports recruiting and brand decisions and is not clothing sizing. The scanning partner holds the scan data and model; WePulse stores measurements and metadata.</p>
+    <h3><span class="n">10.1</span>Flow</h3>
+    <div class="steps">
+      <div class="step"><b>Eligibility</b><span>Backend decides from age, consent and configuration.</span></div>
+      <div class="step"><b>Session</b><span>Camera permission; single-use token valid five minutes.</span></div>
+      <div class="step"><b>Capture</b><span>Partner scanner runs in a locked web view; only the scan ID returns.</span></div>
+      <div class="step"><b>Results</b><span>Worker checks the partner every five minutes with growing waits, up to 20 tries.</span></div>
+      <div class="step"><b>View</b><span>Measurements plus 3D model from a time-limited link.</span></div>
+    </div>
+    <div class="tw"><table>
+      <thead><tr><th>Area</th><th>Detail</th></tr></thead>
+      <tbody>
+        <tr><td>Eligibility states</td><td>Eligible; age verification required; parent consent required (13 to 17); hidden (under 13 or not configured).</td></tr>
+        <tr><td>Who can use it</td><td>Athlete (self), parent, coach and camp. Brand and agent have no access.</td></tr>
+        <tr><td>Devices</td><td>Capture works on iPhone.</td></tr>
+        <tr><td>Age rules</td><td>Under 13 blocked. Ages 13 to 17 need body-scan consent on an approved parent link.</td></tr>
+        <tr><td>Privacy</td><td>The partner receives a pseudonymised athlete identifier.</td></tr>
+        <tr><td>Activation</td><td>Off until partner credentials and a deletion-notice address are configured.</td></tr>
+        <tr><td>Deletion</td><td>The partner has no delete interface. Erasure is an emailed notice, verified by an hourly worker after a set period (24 hours by default), triggered by child data deletion, parent request or self-delete.</td></tr>
+        <tr><td>Tests</td><td>Seven unit test files.</td></tr>
+      </tbody></table></div>
+    <div class="call warn"><span class="ic">Status</span><div>The app handles only some eligibility states and the birthdate attestation screens are not built, so most athletes do not yet see the scan entry. Whether the feature is on in production, and the partner's fee, need confirmation.</div></div>
+  </div>
+</section>
+
+<section id="s11">
+  <div class="sh"><div class="no">11</div><h2>P Score</h2><p>A 0 to 999 marketability index computed by a separate service.</p></div>
+  <div class="sb">
+    <div class="gauge">
+      <svg viewBox="0 0 200 120" role="img" aria-label="Score scale from 0 to 999">
+        <path d="M20 100 A80 80 0 0 1 180 100" fill="none" stroke="var(--line)" stroke-width="14" stroke-linecap="round"/>
+        <path d="M20 100 A80 80 0 0 1 150 38" fill="none" stroke="var(--signal)" stroke-width="14" stroke-linecap="round"/>
+        <text x="100" y="88" text-anchor="middle" font-size="34" font-weight="800" style="font-family:var(--display)">999</text>
+        <text x="100" y="108" text-anchor="middle" font-size="10" class="lab">maximum score</text>
+        <text x="14" y="116" font-size="9" class="lab">0</text>
+      </svg>
+      <p style="margin:0;max-width:56ch">Composite score out of 100, multiplied by ten and capped at 999. Seven tiers map scores to labels from Youth/Grassroots to Global Superstar, with indicative value bands.</p>
+    </div>
+    <h3><span class="n">11.1</span>Weights</h3>
+    <div class="bars">
+      <div class="bar"><span>Social reach</span><div class="tr"><div class="fl hi" style="width:100%"></div></div><b>35%</b></div>
+      <div class="bar"><span>Wins</span><div class="tr"><div class="fl" style="width:71.4%"></div></div><b>25%</b></div>
+      <div class="bar"><span>Education</span><div class="tr"><div class="fl" style="width:28.6%"></div></div><b>10%</b></div>
+      <div class="bar"><span>Ranking</span><div class="tr"><div class="fl" style="width:28.6%"></div></div><b>10%</b></div>
+      <div class="bar"><span>Face recognition</span><div class="tr"><div class="fl" style="width:28.6%"></div></div><b>10%</b></div>
+      <div class="bar"><span>Name recognition</span><div class="tr"><div class="fl" style="width:28.6%"></div></div><b>10%</b></div>
+    </div>
+    <div class="tw"><table>
+      <thead><tr><th>Component</th><th>Source today</th></tr></thead>
+      <tbody>
+        <tr><td>Social reach</td><td>Follower counts from scraping actors, scaled logarithmically</td></tr>
+        <tr><td>Wins and performance</td><td>Sports data lookup and keyword analysis of bios</td></tr>
+        <tr><td>Education, ranking</td><td>Default values or manual input</td></tr>
+        <tr><td>Face and name recognition</td><td>Derived from article length on an encyclopedia</td></tr>
+      </tbody></table></div>
+    <ul class="l">
+      <li>Weights live in versioned formulas. Historical scores stay tied to the formula that produced them. Admins can preview, activate, recalculate and set per-athlete overrides.</li>
+      <li>Sync with the platform: on profile creation (when enabled), every 30 minutes, weekly refresh and on read.</li>
+      <li>Access today uses three fixed service identities. Customer API keys, metering and billing are not built.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="s12">
+  <div class="sh"><div class="no">12</div><h2>Tech stack</h2><p>TypeScript across the platform, OpenTofu for infrastructure.</p></div>
+  <div class="sb">
+    <div class="tw"><table>
+      <thead><tr><th>Layer</th><th>Technology</th></tr></thead>
+      <tbody>
+        <tr><td>API</td><td>Node 24, Express 5.1, Apollo Server 5.5, GraphQL 16, TypeORM 0.3, MySQL 8.4, Redis with BullMQ, Zod 4, GraphQL Shield, Stripe and DocuSign SDKs, Sentry, Jest 30</td></tr>
+        <tr><td>Mobile</td><td>Expo 54, React Native 0.81, React 19, Apollo Client 3.13, Redux Toolkit, NativeWind, AWS Amplify 6, three.js, PostHog, Sentry, Jest 29, Maestro, Expo EAS</td></tr>
+        <tr><td>Web hub</td><td>Next.js 16, Tailwind 4, shadcn/ui, Apollo Client 4, Amplify 6, Vitest</td></tr>
+        <tr><td>Admin console</td><td>React 18, Vite 7, Express 4.21, TanStack Query 5, Radix and shadcn, Recharts, Drizzle with Postgres</td></tr>
+        <tr><td>Brand dashboard</td><td>React 18, Vite 7, Apollo Client 4, Amplify, Stripe JS, jsPDF, Vitest 4</td></tr>
+        <tr><td>P Score</td><td>pnpm monorepo, Express 5, Drizzle with Postgres 16, OpenAPI with generated Zod and React Query clients</td></tr>
+        <tr><td>Infrastructure</td><td>OpenTofu 1.12, S3 state with KMS, SOPS, GitHub Actions with OIDC, Firebase</td></tr>
+      </tbody></table></div>
+    <h3><span class="n">12.1</span>Testing</h3>
+    <div class="tw"><table>
+      <thead><tr><th>Repository</th><th class="n">Files</th><th class="n">Cases</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>Backend</td><td class="n">530+</td><td class="n">~5,700</td><td>Unit, permission, schema, negative, adversarial, child-privacy, AI and critical-flow suites; deeper suites nightly</td></tr>
+        <tr><td>Mobile</td><td class="n">314+</td><td class="n">~3,600</td><td>Jest plus four Maestro flows</td></tr>
+        <tr><td>Admin</td><td class="n">43</td><td class="n">~207</td><td>Node test runner</td></tr>
+        <tr><td>Brand</td><td class="n">21</td><td class="n">~94</td><td>Vitest</td></tr>
+        <tr><td>P Score</td><td class="n">4</td><td class="n">~32</td><td>Authentication only; the scoring algorithm has no tests yet</td></tr>
+      </tbody></table></div>
+  </div>
+</section>
+
+<section id="s13">
+  <div class="sh"><div class="no">13</div><h2>Security</h2><p>Controls in place and items still open.</p></div>
+  <div class="sb">
+    <h3><span class="n">13.1</span>In place</h3>
+    <ul class="l">
+      <li>Deny-by-default permissions with a build gate on coverage; query depth and complexity limits; introspection off in production; Redis rate limits; a firewall on the API.</li>
+      <li>Child privacy: parental consent by e-signature with parent-before-minor ordering, custodial payouts, quarantine, data minimisation, a 12-month retention sweep and birthdate attestation limits.</li>
+      <li>Payments: signed, idempotent webhooks; circuit breakers on about a dozen vendor calls; redaction of keys and personal data in logs.</li>
+      <li>Cloud: organization policies (region lock, root-user deny, MFA for sensitive actions), identity center tiers, break-glass role, organization audit trail, GuardDuty and Config in production, public access blocked on storage, Object Lock and dedicated keys for legal documents, short-lived deploy identities.</li>
+    </ul>
+    <h3><span class="n">13.2</span>Open items</h3>
+    <div class="tw"><table>
+      <thead><tr><th>Area</th><th>Item</th></tr></thead>
+      <tbody>
+        <tr><td>Sign-in</td><td>Production pool has multi-factor sign-in off and uses the default email sender.</td></tr>
+        <tr><td>Resilience</td><td>Production Redis is one node without transit encryption; the P Score database is single-zone; each production score service runs one task.</td></tr>
+        <tr><td>Data lifecycle</td><td>Adult account deletion soft-deletes the user record only and does not cancel a subscription.</td></tr>
+        <tr><td>Logging</td><td>One email-verification flow writes its six-digit code to logs.</td></tr>
+        <tr><td>Repository settings</td><td>No branch protection or vulnerability alerts on the repositories checked.</td></tr>
+        <tr><td>Recovery</td><td>No cross-region copies, read replicas or documented recovery targets.</td></tr>
+      </tbody></table></div>
+  </div>
+</section>
+
+<section id="s14">
+  <div class="sh"><div class="no">14</div><h2>Estimates and open data</h2><p>What is estimated, and where the real numbers live.</p></div>
+  <div class="sb">
+    <ul class="l">
+      <li>Cloud cost comes from the infrastructure definitions and AWS list prices with low-traffic assumptions. It is not a bill.</li>
+      <li>AI cost per call uses the token caps and list prices in the code.</li>
+      <li>The ROI model uses placeholder volumes.</li>
+    </ul>
+    <div class="tw"><table>
+      <thead><tr><th>Question</th><th>Where the answer lives</th></tr></thead>
+      <tbody>
+        <tr><td>Actual monthly cloud cost by account and service</td><td>AWS Cost Explorer</td></tr>
+        <tr><td>Real AI tokens and spend by feature and user</td><td>AI usage table in the production database</td></tr>
+        <tr><td>Users, deals, subscriptions, payouts</td><td>Production database and Stripe</td></tr>
+        <tr><td>Vendor plan costs (DocuSign, gateway, FitMatch, Apify, Twilio)</td><td>Vendor invoices</td></tr>
+        <tr><td>Whether FitMatch and e-signature are on in production</td><td>Production configuration</td></tr>
+        <tr><td>Camp membership price</td><td>Product decision</td></tr>
+      </tbody></table></div>
+    <h3><span class="n">14.1</span>Glossary</h3>
+    <div class="tw"><table>
+      <tbody>
+        <tr><td>NIL</td><td>Name, image and likeness: the rights that let student athletes earn from endorsements.</td></tr>
+        <tr><td>P Score</td><td>The 0 to 999 athlete marketability index.</td></tr>
+        <tr><td>Verified parental consent</td><td>A parent's legally recorded consent for a child's account, collected by e-signature.</td></tr>
+        <tr><td>Connect account</td><td>A Stripe account that lets an athlete, parent or agent receive payouts.</td></tr>
+        <tr><td>Gateway</td><td>A service between the platform and the AI provider that enforces budgets.</td></tr>
+        <tr><td>Fargate</td><td>AWS service that runs containers without managing servers.</td></tr>
+      </tbody></table></div>
+  </div>
+</section>
+
+</main>
+</div>
+
+<footer class="gut"><p>Source: code-level review of the platform repositories and infrastructure definitions on 4 November 2026. Estimates are tagged. No production data was accessed.</p></footer>
+
+<script>
+(function(){
+  var ids=['i_brand','i_cs','i_cm','i_cc','i_ag','i_ann','i_deals','i_size','i_ai','i_infra','i_other'];
+  var defs={}; ids.forEach(function(i){defs[i]=document.getElementById(i).value});
+  function v(i){var x=parseFloat(document.getElementById(i).value);return isFinite(x)&&x>0?x:0}
+  function usd(n){var s=Math.abs(Math.round(n)).toLocaleString('en-US');return (n<0?'-$':'$')+s}
+  function set(id,t){document.getElementById(id).textContent=t}
+  function calc(){
+    var ann=Math.min(100,v('i_ann'))/100, disc=1-0.2*ann;
+    var mem=(v('i_brand')*1500+v('i_cs')*199+v('i_cm')*499+v('i_cc')*999+v('i_ag')*150)*disc;
+    var fee=v('i_deals')*v('i_size')*0.10, rev=mem+fee;
+    var calls=v('i_ai'), aiCost=calls*(3*0.0025+1.5*0.01);
+    var infra=v('i_infra'), other=v('i_other'), net=rev-infra-aiCost-other;
+    set('o_mem',usd(mem)); set('o_fee',usd(fee)); set('o_rev',usd(rev));
+    set('o_infra','-'+usd(infra)); set('o_ai','-'+usd(aiCost)); set('o_other','-'+usd(other));
+    set('o_net',usd(net)); set('o_yr',usd(net*12));
+    document.getElementById('o_netline').className='lnr tot'+(net<0?' neg':'');
+    var per=1500*disc; set('o_be',per>0?Math.ceil((infra+aiCost)/per)+' brands':'n/a');
+    var tok=calls*4500; set('tok',tok>=1e6?(tok/1e6).toFixed(tok>=1e8?0:1).replace(/\.0$/,'')+'M':Math.round(tok/1e3)+'K');
+  }
+  ids.forEach(function(i){document.getElementById(i).addEventListener('input',calc)});
+  document.getElementById('reset').addEventListener('click',function(){ids.forEach(function(i){document.getElementById(i).value=defs[i]});calc()});
+  calc();
+
+  // reading progress and contents state
+  var bar=document.getElementById('bar'), links=[].slice.call(document.querySelectorAll('#toc a'));
+  var secs=links.map(function(a){return document.querySelector(a.getAttribute('href'))});
+  var btn=document.getElementById('navbtn'), panel=document.getElementById('navpanel'), closeb=document.getElementById('navclose');
+  function onScroll(){
+    var h=document.documentElement.scrollHeight-window.innerHeight;
+    var f=h>0?Math.min(1,window.scrollY/h):0, pct=Math.round(f*100);
+    bar.style.transform='scaleX('+f+')';
+    var cur=0; secs.forEach(function(s,i){if(s&&s.getBoundingClientRect().top<160)cur=i});
+    links.forEach(function(a,i){var li=a.parentNode;li.classList.toggle('on',i===cur);
+      if(i===cur)a.setAttribute('aria-current','true');else a.removeAttribute('aria-current')});
+    document.getElementById('curno').textContent=('0'+(cur+1)).slice(-2);
+    document.getElementById('curname').textContent=links[cur].querySelector('.lbl').textContent;
+    document.getElementById('pct').textContent=pct+'%';
+    document.getElementById('fpct').textContent=pct+'% read';
+    document.getElementById('meterfill').style.width=pct+'%';
+  }
+  window.addEventListener('scroll',onScroll,{passive:true}); onScroll();
+  function setOpen(o){btn.setAttribute('aria-expanded',o);panel.classList.toggle('open',o)}
+  btn.addEventListener('click',function(){setOpen(btn.getAttribute('aria-expanded')!=='true')});
+  closeb.addEventListener('click',function(){setOpen(false)});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')setOpen(false)});
+  links.forEach(function(a){a.addEventListener('click',function(){setOpen(false)})});
+})();
+</script>
