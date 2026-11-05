@@ -416,32 +416,28 @@ footer p{max-width:80ch}
     <h3><span class="n">6.1</span>System context</h3>
     <figure class="fig" style="margin-inline:0">
       <svg viewBox="0 0 940 400" role="img" aria-label="System context diagram: four clients connect to the GraphQL API, which uses MySQL, Redis, the P Score API and external vendors">
-        <text class="lab" x="20" y="22">Clients</text><text class="lab" x="330" y="22">Core</text><text class="lab" x="640" y="22">Data and services</text>
-        <g><rect class="bx" x="20" y="40" width="190" height="52" rx="5"/><text x="115" y="72" text-anchor="middle" font-size="15" font-weight="600">Mobile app</text>
-        <rect class="bx" x="20" y="112" width="190" height="52" rx="5"/><text x="115" y="144" text-anchor="middle" font-size="15" font-weight="600">Web hub</text>
-        <rect class="bx" x="20" y="184" width="190" height="52" rx="5"/><text x="115" y="216" text-anchor="middle" font-size="15" font-weight="600">Brand dashboard</text>
-        <rect class="bx" x="20" y="256" width="190" height="52" rx="5"/><text x="115" y="288" text-anchor="middle" font-size="15" font-weight="600">Admin console</text></g>
-        <path class="ln s" d="M210 66 H300 M210 138 H300 M210 210 H300 M210 282 H300"/>
-        <rect class="bx core" x="300" y="100" width="220" height="150" rx="6"/>
-        <text class="core-t" x="410" y="160" text-anchor="middle" font-size="20" font-weight="700">GraphQL API</text>
-        <text class="core-t" x="410" y="184" text-anchor="middle" font-size="12.5" style="opacity:.8">permissions, payments, chat, jobs</text>
-        <text class="core-t" x="410" y="204" text-anchor="middle" font-size="12.5" style="opacity:.8">Elastic Beanstalk</text>
+        <text class="lab" x="20" y="22">Clients</text><text class="lab" x="300" y="22">Core</text><text class="lab" x="610" y="22">Data</text><text class="lab" x="790" y="22">Services</text>
+        <path class="ln s" d="M210 66 H255 M210 138 H255 M210 210 H255 M210 282 H255 M255 66 V282 M255 175 H300"/>
+        <path class="ln" d="M520 110 H610 M565 60 V110 M565 60 H610"/>
+        <path class="ln" d="M520 175 H765 M765 53 V263 M765 53 H790 M765 95 H790 M765 137 H790 M765 179 H790 M765 221 H790 M765 263 H790"/>
+        <path class="ln" d="M410 250 V290"/><path class="ln" d="M115 308 V322 H300"/>
+        <path class="ln" d="M520 322 H610"/><path class="ln" d="M740 326 H790"/>
+        <rect class="bx" x="20" y="40" width="190" height="52" rx="5"/><text x="115.0" y="71.0" text-anchor="middle" font-size="15" font-weight="600">Mobile app</text>
+        <rect class="bx" x="20" y="112" width="190" height="52" rx="5"/><text x="115.0" y="143.0" text-anchor="middle" font-size="15" font-weight="600">Web hub</text>
+        <rect class="bx" x="20" y="184" width="190" height="52" rx="5"/><text x="115.0" y="215.0" text-anchor="middle" font-size="15" font-weight="600">Brand dashboard</text>
+        <rect class="bx" x="20" y="256" width="190" height="52" rx="5"/><text x="115.0" y="287.0" text-anchor="middle" font-size="15" font-weight="600">Admin console</text>
+        <rect class="bx core" x="300" y="100" width="220" height="150" rx="6"/><text class="core-t" x="410" y="160" text-anchor="middle" font-size="20" font-weight="700">GraphQL API</text><text class="core-t" x="410" y="184" text-anchor="middle" font-size="12.5" style="opacity:.8">permissions, payments, chat, jobs</text><text class="core-t" x="410" y="204" text-anchor="middle" font-size="12.5" style="opacity:.8">Elastic Beanstalk</text>
         <rect class="bx" x="300" y="290" width="220" height="64" rx="6"/><text x="410" y="318" text-anchor="middle" font-size="15" font-weight="600">P Score API</text><text x="410" y="338" text-anchor="middle" font-size="12" fill="var(--muted)">ECS Fargate</text>
-        <path class="ln" d="M410 250 V290"/><path class="ln" d="M210 282 C260 330 270 322 300 322"/>
-        <g><rect class="bx" x="640" y="36" width="130" height="40" rx="5"/><text x="705" y="61" text-anchor="middle" font-size="14">MySQL 8.4</text>
-        <rect class="bx" x="640" y="86" width="130" height="40" rx="5"/><text x="705" y="111" text-anchor="middle" font-size="14">Redis</text>
-        <rect class="bx" x="640" y="296" width="130" height="40" rx="5"/><text x="705" y="321" text-anchor="middle" font-size="14">Postgres 16</text></g>
-        <path class="ln" d="M520 130 H580 V56 H640 M580 106 H640"/><path class="ln" d="M520 322 H640"/>
-        <g><rect class="bx sig" x="790" y="36" width="130" height="34" rx="5"/><text x="855" y="58" text-anchor="middle" font-size="13.5">Stripe</text>
-        <rect class="bx sig" x="790" y="78" width="130" height="34" rx="5"/><text x="855" y="100" text-anchor="middle" font-size="13.5">DocuSign</text>
-        <rect class="bx sig" x="790" y="120" width="130" height="34" rx="5"/><text x="855" y="142" text-anchor="middle" font-size="13.5">OpenAI gateway</text>
-        <rect class="bx sig" x="790" y="162" width="130" height="34" rx="5"/><text x="855" y="184" text-anchor="middle" font-size="13.5">FitMatch</text>
-        <rect class="bx sig" x="790" y="204" width="130" height="34" rx="5"/><text x="855" y="226" text-anchor="middle" font-size="13.5">Cognito sign-in</text>
-        <rect class="bx sig" x="790" y="246" width="130" height="34" rx="5"/><text x="855" y="268" text-anchor="middle" font-size="13.5">Email, SMS, push</text></g>
-        <path class="ln" d="M520 150 H740 V53 H790 M740 95 H790 M740 137 H790 M740 179 H790 M740 221 H790 M740 263 H790"/>
-        <text class="lab" x="790" y="318">Score data sources</text>
-        <rect class="bx" x="790" y="326" width="130" height="34" rx="5"/><text x="855" y="348" text-anchor="middle" font-size="12.5">Social, sports, wiki</text>
-        <path class="ln" d="M770 316 H790 V343"/>
+        <rect class="bx" x="610" y="40" width="130" height="40" rx="5"/><text x="675.0" y="65.0" text-anchor="middle" font-size="14" font-weight="400">MySQL 8.4</text>
+        <rect class="bx" x="610" y="90" width="130" height="40" rx="5"/><text x="675.0" y="115.0" text-anchor="middle" font-size="14" font-weight="400">Redis</text>
+        <rect class="bx" x="610" y="306" width="130" height="40" rx="5"/><text x="675.0" y="331.0" text-anchor="middle" font-size="14" font-weight="400">Postgres 16</text>
+        <rect class="bx sig" x="790" y="36" width="130" height="34" rx="5"/><text x="855.0" y="58.0" text-anchor="middle" font-size="13.5" font-weight="400">Stripe</text>
+        <rect class="bx sig" x="790" y="78" width="130" height="34" rx="5"/><text x="855.0" y="100.0" text-anchor="middle" font-size="13.5" font-weight="400">DocuSign</text>
+        <rect class="bx sig" x="790" y="120" width="130" height="34" rx="5"/><text x="855.0" y="142.0" text-anchor="middle" font-size="13.5" font-weight="400">OpenAI gateway</text>
+        <rect class="bx sig" x="790" y="162" width="130" height="34" rx="5"/><text x="855.0" y="184.0" text-anchor="middle" font-size="13.5" font-weight="400">FitMatch</text>
+        <rect class="bx sig" x="790" y="204" width="130" height="34" rx="5"/><text x="855.0" y="226.0" text-anchor="middle" font-size="13.5" font-weight="400">Cognito sign-in</text>
+        <rect class="bx sig" x="790" y="246" width="130" height="34" rx="5"/><text x="855.0" y="268.0" text-anchor="middle" font-size="13.5" font-weight="400">Email, SMS, push</text>
+        <text class="lab" x="790" y="298">Score data sources</text><rect class="bx" x="790" y="309" width="130" height="34" rx="5"/><text x="855.0" y="331.0" text-anchor="middle" font-size="12.5" font-weight="400">Social, sports, wiki</text>
       </svg>
       <figcaption>Admin also reaches P Score directly over private links.</figcaption>
     </figure>
