@@ -208,7 +208,7 @@ footer p{max-width:80ch}
       <div><b>95</b><span>data entities</span></div>
       <div><b>13</b><span>AI features</span></div>
       <div><b>9.4K</b><span>automated tests</span></div>
-      <div><b>5</b><span>AWS accounts</span></div>
+      <div><b>32</b><span>role workflows</span></div>
     </div>
     
   </div>
@@ -237,7 +237,7 @@ footer p{max-width:80ch}
         <tr><td>Price range</td><td>$150 to $1,500 per month by role. Annual plans are 20% cheaper.</td></tr>
         <tr><td>Clients</td><td>React Native app for six roles, Next.js web hub, brand dashboard, admin console.</td></tr>
         <tr><td>Core</td><td>One GraphQL API on Node 24 with MySQL and Redis; a separate P Score API on Postgres.</td></tr>
-        <tr><td>Cloud</td><td>AWS in five accounts, Google Cloud for push. About $1.1k per month.</td></tr>
+        <tr><td>Cloud</td><td>AWS, with Google Cloud for push notifications. About $1.1k per month.</td></tr>
         <tr><td>AI</td><td>OpenAI gpt-4o through a budget-controlled gateway; thirteen features; about $0.005 to $0.05 per call.</td></tr>
         <tr><td>FitMatch</td><td>3D body scan with about 70 measurements from a scanning partner, with age and consent controls.</td></tr>
         <tr><td>Child privacy</td><td>Parental consent, custodial payouts, data minimisation and retention in the backend.</td></tr>
@@ -364,7 +364,7 @@ footer p{max-width:80ch}
       <thead><tr><th>Current setup</th><th>To be confirmed with finance</th></tr></thead>
       <tbody>
         <tr><td>Membership prices, annual discount, 10% fee, commission defaults</td><td>Active members per role, conversion to paid, churn</td></tr>
-        <tr><td>Cloud cost estimate by account</td><td>Real AWS bill by service</td></tr>
+        <tr><td>Cloud cost estimate</td><td>Real AWS bill by service</td></tr>
         <tr><td>AI token caps and list-price cost per call</td><td>Actual monthly AI tokens and spend (logged per call)</td></tr>
         <tr><td>Payment, invoice and contract workflows</td><td>Deals per month, average deal size, payout volume</td></tr>
         <tr><td>Vendor list</td><td>Plan prices for Stripe, DocuSign, gateway, FitMatch, Apify, Twilio</td></tr>
@@ -490,13 +490,12 @@ footer p{max-width:80ch}
 
     <h3><span class="n">6.4</span>Environments</h3>
     <div class="tw"><table>
-      <thead><tr><th>Environment</th><th>Account</th><th>Address</th><th>Notes</th></tr></thead>
+      <thead><tr><th>Environment</th><th>Address</th><th>Notes</th></tr></thead>
       <tbody>
-        <tr><td>Production</td><td>prod</td><td>api.wepulse.io</td><td>Multi-zone MySQL, 2+ backend instances, firewall, audit tooling.</td></tr>
-        <tr><td>Staging</td><td>stg</td><td>api-stg.wepulse.io</td><td>Own database, cache and sign-in pool; gated website; sandboxed email.</td></tr>
-        <tr><td>Development</td><td>dev</td><td>api-dev.wepulse.io</td><td>Same shape as staging.</td></tr>
-        <tr><td>Shared</td><td>shared</td><td>admin.wepulse.io</td><td>Admin console, image registry, build artifacts, sign-in gates.</td></tr>
-        <tr><td>Management</td><td>mgmt</td><td>n/a</td><td>Organization policies, identity center, organization audit trail.</td></tr>
+        <tr><td>Production</td><td>api.wepulse.io</td><td>Multi-zone MySQL, 2+ backend instances, firewall, audit tooling.</td></tr>
+        <tr><td>Staging</td><td>api-stg.wepulse.io</td><td>Own database, cache and sign-in pool; gated website; sandboxed email.</td></tr>
+        <tr><td>Development</td><td>api-dev.wepulse.io</td><td>Same shape as staging.</td></tr>
+        <tr><td>Admin</td><td>admin.wepulse.io</td><td>Admin console, image registry, build artifacts, sign-in gates.</td></tr>
       </tbody></table></div>
 
     <h3><span class="n">6.5</span>Delivery pipeline</h3>
@@ -507,7 +506,7 @@ footer p{max-width:80ch}
       <div class="step"><b>Promote to staging</b><span>Same build, manual trigger.</span></div>
       <div class="step"><b>Promote to production</b><span>Same build; rollback workflow ready.</span></div>
     </div>
-    <p>Each account has its own short-lived deploy identity from GitHub, so no long-lived cloud keys are stored. Infrastructure changes are applied locally after review.</p>
+    <p>Every environment deploys with a short-lived identity from GitHub, so no long-lived cloud keys are stored. Infrastructure changes are applied locally after review.</p>
   </div>
 </section>
 
@@ -765,7 +764,7 @@ footer p{max-width:80ch}
     <div class="tw"><table>
       <thead><tr><th>Question</th><th>Where the answer lives</th></tr></thead>
       <tbody>
-        <tr><td>Actual monthly cloud cost by account and service</td><td>AWS Cost Explorer</td></tr>
+        <tr><td>Actual monthly cloud cost by service</td><td>AWS Cost Explorer</td></tr>
         <tr><td>Real AI tokens and spend by feature and user</td><td>AI usage table in the production database</td></tr>
         <tr><td>Users, deals, subscriptions, payouts</td><td>Production database and Stripe</td></tr>
         <tr><td>Vendor plan costs (DocuSign, gateway, FitMatch, Apify, Twilio)</td><td>Vendor invoices</td></tr>
