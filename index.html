@@ -210,7 +210,7 @@ footer p{max-width:80ch}
       <div><b>9.4K</b><span>automated tests</span></div>
       <div><b>5</b><span>AWS accounts</span></div>
     </div>
-    <div class="basis"><span><b>Basis</b> code-level review of the repositories and cloud definitions</span><span><b>Reviewed</b> 4 Nov 2026</span><span><b>Estimates</b> tagged <span class="tag">EST</span></span><span><b>Not measured</b> users, revenue, real AI spend</span></div>
+    
   </div>
 </header>
 
@@ -237,8 +237,8 @@ footer p{max-width:80ch}
         <tr><td>Price range</td><td>$150 to $1,500 per month by role. Annual plans are 20% cheaper.</td></tr>
         <tr><td>Clients</td><td>React Native app for six roles, Next.js web hub, brand dashboard, admin console.</td></tr>
         <tr><td>Core</td><td>One GraphQL API on Node 24 with MySQL and Redis; a separate P Score API on Postgres.</td></tr>
-        <tr><td>Cloud</td><td>AWS in five accounts, Google Cloud for push. About $1.1k per month <span class="tag">EST</span>.</td></tr>
-        <tr><td>AI</td><td>OpenAI gpt-4o through a budget-controlled gateway; thirteen features; about $0.005 to $0.05 per call <span class="tag">EST</span>.</td></tr>
+        <tr><td>Cloud</td><td>AWS in five accounts, Google Cloud for push. About $1.1k per month.</td></tr>
+        <tr><td>AI</td><td>OpenAI gpt-4o through a budget-controlled gateway; thirteen features; about $0.005 to $0.05 per call.</td></tr>
         <tr><td>FitMatch</td><td>3D body scan with about 70 measurements from a scanning partner, with age and consent controls.</td></tr>
         <tr><td>Child privacy</td><td>Parental consent, custodial payouts, data minimisation and retention in the backend.</td></tr>
       </tbody></table></div>
@@ -306,7 +306,7 @@ footer p{max-width:80ch}
         <tr><td>Platform keeps, before card fees</td><td class="n">$100</td><td class="n">$100</td></tr>
       </tbody></table></div>
 
-    <h3><span class="n">3.4</span>Monthly cost base <span class="tag">EST</span></h3>
+    <h3><span class="n">3.4</span>Monthly cost base</h3>
     <div class="bars" id="costbars">
       <div class="bar"><span>Production</span><div class="tr"><div class="rg" style="left:26.7%;width:13.3%"></div><div class="fl" style="width:26.7%"></div></div><b>$400-600</b></div>
       <div class="bar"><span>Staging</span><div class="tr"><div class="rg" style="left:16.3%;width:6.4%"></div><div class="fl" style="width:16.3%"></div></div><b>$245-340</b></div>
@@ -323,7 +323,7 @@ footer p{max-width:80ch}
         <tr><td>Staging and development</td><td>Same shape with single instances; development may also pay extended support on an older database version</td></tr>
         <tr><td>Shared</td><td>Admin console, database, private links, image registry</td></tr>
         <tr><td>Google Cloud</td><td>Push notifications and directory lookup, close to $0</td></tr>
-        <tr><td>Usage based</td><td>AI model calls, Stripe processing, DocuSign, FitMatch, Apify, Twilio, email, Sentry, PostHog, Expo, GitHub (plans not in code)</td></tr>
+        <tr><td>Usage based</td><td>AI model calls, Stripe processing, DocuSign, FitMatch, Apify, Twilio, email, Sentry, PostHog, Expo, GitHub</td></tr>
       </tbody></table></div>
 
     <h3><span class="n">3.5</span>ROI what-if model</h3>
@@ -359,9 +359,9 @@ footer p{max-width:80ch}
       </div>
     </div>
 
-    <h3><span class="n">3.6</span>Known versus still needed</h3>
+    <h3><span class="n">3.6</span>Current setup and next inputs</h3>
     <div class="tw"><table>
-      <thead><tr><th>Known from code</th><th>Needed from production or finance</th></tr></thead>
+      <thead><tr><th>Current setup</th><th>To be confirmed with finance</th></tr></thead>
       <tbody>
         <tr><td>Membership prices, annual discount, 10% fee, commission defaults</td><td>Active members per role, conversion to paid, churn</td></tr>
         <tr><td>Cloud cost estimate by account</td><td>Real AWS bill by service</td></tr>
@@ -576,7 +576,7 @@ footer p{max-width:80ch}
         <tr><td>OpenAI via Axemere gateway</td><td>AI features</td><td>Per token; gateway enforces budgets</td></tr>
         <tr><td>Stripe</td><td>Memberships, deal payments, payouts</td><td>Fees per transaction</td></tr>
         <tr><td>DocuSign</td><td>E-signature, parental consent</td><td>Per envelope or plan</td></tr>
-        <tr><td>FitMatch</td><td>Body scan</td><td>Vendor fee, not in code</td></tr>
+        <tr><td>FitMatch</td><td>Body scan</td><td>Vendor fee</td></tr>
         <tr><td>Apify, TheSportsDB, Wikipedia</td><td>P Score inputs</td><td>Per run for Apify</td></tr>
         <tr><td>Twilio</td><td>SMS from the score service</td><td>About $0.008 per message</td></tr>
         <tr><td>Sentry, PostHog, Expo EAS, GitHub</td><td>Errors, analytics, mobile builds, source and CI</td><td>Plans</td></tr>
@@ -618,20 +618,20 @@ footer p{max-width:80ch}
         <tr><td>Campaign ROI predictor</td><td>Brand</td><td class="n">1,500</td></tr>
         <tr><td>Journey reel clip analysis (background worker)</td><td>Athlete</td><td class="n">4,096</td></tr>
       </tbody></table></div>
-    <h3><span class="n">9.3</span>Approximate usage <span class="tag">EST</span></h3>
+    <h3><span class="n">9.3</span>Approximate usage</h3>
     <div class="glance">
       <div><b>1 to 5K</b><span>input tokens per call</span></div>
       <div><b>0.3 to 4K</b><span>output tokens per call</span></div>
       <div><b>$0.005 to $0.05</b><span>cost per call</span></div>
       <div><b id="tok">45M</b><span>tokens per month in the model in 3.5</span></div>
     </div>
-    <p>Cost uses the list prices in the code: $0.0025 per 1,000 input tokens and $0.01 per 1,000 output tokens.</p>
+    <p>Cost uses list prices: $0.0025 per 1,000 input tokens and $0.01 per 1,000 output tokens.</p>
     <h3><span class="n">9.4</span>Controls</h3>
     <ul class="l">
       <li>Per-minute limits in production: chat 20, search 15, offer analysis, draft, pitch and brief 10, contract review 5; other queries share 60 per minute. Global limits are 100 requests and 50 mutations per minute per caller.</li>
       <li>Brand AI on an athlete needs the athlete to be eligible or to have a prior relationship.</li>
       <li>Admins can switch features on and off and read usage statistics.</li>
-      <li>There is no per-user daily or monthly token quota in the code; limits are per minute and at the gateway.</li>
+      <li>There is no per-user daily or monthly token quota; limits are per minute and at the gateway.</li>
     </ul>
     <div class="call info"><span class="ic">Exact data</span><div>Every call is stored with tokens and cost, so real monthly usage is one query on the usage table. That query has not been run.</div></div>
   </div>
@@ -759,7 +759,7 @@ footer p{max-width:80ch}
   <div class="sb">
     <ul class="l">
       <li>Cloud cost comes from the infrastructure definitions and AWS list prices with low-traffic assumptions. It is not a bill.</li>
-      <li>AI cost per call uses the token caps and list prices in the code.</li>
+      <li>AI cost per call uses the token caps and list prices.</li>
       <li>The ROI model uses placeholder volumes.</li>
     </ul>
     <div class="tw"><table>
@@ -788,7 +788,7 @@ footer p{max-width:80ch}
 </main>
 </div>
 
-<footer class="gut"><p>Source: code-level review of the platform repositories and infrastructure definitions on 4 November 2026. Estimates are tagged. No production data was accessed.</p></footer>
+<footer class="gut"><p>WePulse platform overview, November 2026.</p></footer>
 
 <script>
 (function(){
