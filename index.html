@@ -45,12 +45,14 @@ section+section{border-top:1px solid var(--line-2);margin-top:40px}
 .sb{min-width:0}
 
 /* section header */
-.sh{display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:18px;row-gap:4px;align-items:center;margin-bottom:22px}
-.sh .no{grid-row:1 / span 2;width:56px;height:56px;border-radius:12px;background:var(--black);color:var(--lime);display:grid;place-items:center;font-family:var(--mono);font-size:19px;font-weight:600;letter-spacing:.02em}
-.sh h2{margin:0;font-size:clamp(24px,3vw,30px);line-height:1.15;font-weight:700;letter-spacing:-.015em;display:flex;align-items:center;gap:10px}
-.sh h2 .ic2{width:22px;height:22px;color:var(--olive);stroke-width:2}
-.sh p{margin:0;color:var(--muted);font-size:15.5px}
-@media (max-width:560px){.sh .no{width:44px;height:44px;font-size:16px;border-radius:10px}.sh h2 .ic2{display:none}}
+.sh{display:flex;align-items:center;gap:18px;margin-bottom:24px}
+.sh .no{flex:none;width:60px;height:60px;border-radius:14px;background:var(--black);color:var(--lime);display:grid;place-items:center}
+.sh .no .ic2{width:28px;height:28px;stroke-width:1.8}
+.sh .sx{min-width:0;display:flex;flex-direction:column;gap:4px}
+.sn{font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--olive);line-height:1}
+.sh h2{margin:0;font-size:clamp(24px,3vw,30px);line-height:1.15;font-weight:700;letter-spacing:-.015em}
+.sh p{margin:0;color:var(--muted);font-size:15.5px;line-height:1.4}
+@media (max-width:560px){.sh{gap:14px}.sh .no{width:48px;height:48px;border-radius:12px}.sh .no .ic2{width:22px;height:22px}}
 
 /* key line */
 .key{margin:0 0 26px;padding:14px 18px 14px 20px;background:var(--page);border:1px solid var(--line);border-left:5px solid var(--lime);border-radius:0 var(--r) var(--r) 0;font-size:clamp(17px,2vw,19px);line-height:1.5;font-weight:500;max-width:80ch;box-shadow:0 1px 0 rgba(0,0,0,.02)}
@@ -58,8 +60,8 @@ section+section{border-top:1px solid var(--line-2);margin-top:40px}
 /* body text */
 .sb>p,.ref>p{max-width:74ch}
 p{margin:0 0 14px}
-h3{display:flex;align-items:baseline;gap:12px;margin:44px 0 14px;font-size:19px;line-height:1.3;font-weight:650;letter-spacing:-.005em}
-h3 .n{font-family:var(--mono);font-size:13px;font-weight:600;color:var(--olive);min-width:2.6em}
+h3{display:flex;align-items:center;gap:12px;margin:44px 0 14px;font-size:19px;line-height:1.3;font-weight:650;letter-spacing:-.005em}
+h3 .n,.ref .rh .n{flex:none;box-sizing:border-box;width:52px;padding:4px 0;border-radius:6px;background:var(--olive-soft);font-family:var(--mono);font-size:12.5px;line-height:1.2;font-weight:600;color:var(--olive);text-align:center}
 .sb>h3:first-child,.key+h3{margin-top:8px}
 ul.l{margin:6px 0 16px;padding:0;list-style:none;max-width:80ch}
 ul.l li{position:relative;padding:7px 0 7px 22px;border-bottom:1px solid var(--line)}
@@ -131,7 +133,7 @@ tbody tr:hover td{background:var(--faint)}
 /* ---------- detail (reference) blocks ---------- */
 .ref{margin:44px 0 8px}
 .ref .rh{display:flex;align-items:center;gap:12px;margin:0 0 14px;font-size:19px;line-height:1.3;font-weight:650;letter-spacing:-.005em;color:var(--ink)}
-.ref .rh .n{font-family:var(--mono);font-size:13px;font-weight:600;color:var(--olive);min-width:2.6em}
+
 .ref .rh::after{content:"Detail";margin-left:auto;font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:1px 8px}
 .ref table,.ref ul.l li,.ref>p{font-size:13.5px}
 .ref .tw{margin-top:8px}
@@ -276,7 +278,7 @@ footer p{margin:0;padding-top:22px;border-top:1px solid var(--line-2)}
 <div class="shell gut">
 <main>
 <section id="s1">
-  <div class="sh"><div class="no">01</div><h2><svg class="ic2" aria-hidden="true"><use href="#i-doc"/></svg>Summary</h2><p>One marketplace for athletes, parents, coaches, brands, camps and agents.</p></div>
+  <div class="sh"><div class="no"><svg class="ic2" aria-hidden="true"><use href="#i-doc"/></svg></div><div class="sx"><span class="sn">Section 01</span><h2>Summary</h2><p>One marketplace for athletes, parents, coaches, brands, camps and agents.</p></div></div>
   <div class="sb">
 <p>WePulse is a marketplace and network for sports NIL (name, image and likeness) deals. Athletes, parents, coaches, brands, camps and agents use one sign-in to find each other, agree deals, sign contracts and get paid. An admin console runs verification, moderation and operations. A separate service, P Score, rates each athlete's marketability from 0 to 999.</p>
     <h3><span class="n">1.1</span>Platform highlights</h3>
@@ -331,7 +333,7 @@ footer p{margin:0;padding-top:22px;border-top:1px solid var(--line-2)}
 </section>
 
 <section id="s2">
-  <div class="sh"><div class="no">02</div><h2><svg class="ic2" aria-hidden="true"><use href="#i-users"/></svg>Users and roles</h2><p>Who uses WePulse and what each role can do.</p></div>
+  <div class="sh"><div class="no"><svg class="ic2" aria-hidden="true"><use href="#i-users"/></svg></div><div class="sx"><span class="sn">Section 02</span><h2>Users and roles</h2><p>Who uses WePulse and what each role can do.</p></div></div>
   <div class="sb">
     <p class="key">Seven roles share one sign-in. Athletes and parents join free; brands, agents and coaches pay for membership.</p>
         <div class="roles">
@@ -343,7 +345,7 @@ footer p{margin:0;padding-top:22px;border-top:1px solid var(--line-2)}
       <div class="role"><div class="hd"><h4><span class="ico"><svg class="ic2" aria-hidden="true"><use href="#i-flag"/></svg></span>Camp</h4><span class="pill paid">MEMBERSHIP</span></div><p>Create and archive events, attendance, applications and join requests, athlete pipeline with parent status, staff, invitations, analytics.</p></div>
       <div class="role"><div class="hd"><h4><span class="ico"><svg class="ic2" aria-hidden="true"><use href="#i-sliders"/></svg></span>Admin</h4><span class="pill none">INTERNAL</span></div><p>Users, verification queues, moderation and appeals, disputes, analytics, P Score administration, education content, AI controls, deployments, audit.</p></div>
     </div>
-    <div class="ref"><div class="rh">App size by role</div>
+    <div class="ref"><div class="rh"><span class="n">2.1</span>App size by role</div>
 <div class="glance">
       <div><b>216</b><span>mobile screen files</span></div>
       <div><b>48 to 71</b><span>stack screens per role</span></div>
@@ -356,7 +358,7 @@ footer p{margin:0;padding-top:22px;border-top:1px solid var(--line-2)}
 </section>
 
 <section id="s3">
-  <div class="sh"><div class="no">03</div><h2><svg class="ic2" aria-hidden="true"><use href="#i-scan"/></svg>FitMatch</h2><p>A 3D body scan inside the athlete profile.</p></div>
+  <div class="sh"><div class="no"><svg class="ic2" aria-hidden="true"><use href="#i-scan"/></svg></div><div class="sx"><span class="sn">Section 03</span><h2>FitMatch</h2><p>A 3D body scan inside the athlete profile.</p></div></div>
   <div class="sb">
     <div class="partner"><span>Scanning partner</span><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAg4AAABICAYAAACeJX1hAAAxNUlEQVR42u2deZxcR3Xvv6fu7dm02JJ3vCFvGMxuiMEslhc2G+PgoIH3EkIgrAnghJDNyXuyPu/lAXlxwmI281iMkwASSdgDBJBlsFlsYQw2GMtGliXLuyyNtpnpe+u8P05V953WSJru6Znp7rnHn7K6p+9St27VOb86q1BSSV1Iq1drsmIFXkQU4KPf3nxq39CCswYHB5/lVZ/j8/ykPK8egvoKOEGoiiS7nbhtSaVyc3W8euNYdexHb3nhYT8Bu8bKtZpesZw8XrOkkkoqqaR9SYATgFPD504nBRJgO/ALYG8T554MnAJkLTyrAncB94bPB6OTwr3yLhnXZsb+YeA2oBqebZaFrMratSTnnisZwLU37V3u8+rr0r6+84HjkzQhz6rk1SqqHlRrHRRxJC4h7e8HIBuv7vI+u8nn+oUd2x/63GUXnjYCKitXIqtWiS/ZQ0klda1c2x8PK6lNA/xm4HIgDQPbyYLOA33AzcAfA5uaEF5/DrwbGA0CsBmB6YH/C3x4ivd6d2jVHgIOcey/A/wJ8MhsA4fVqzUZHpYc4FPXPfzsvkULLxe4JO3rk/HRPeRZNffqcSICiIhIcfTVBxihXkWcF5G0b2ABLkkYHx3bkFfH/37jt97/mVWrVmWrVZNhsXuVVFJJHSu/pAEs6AF4kjTwLC3BRGuUAouAY8PnbqEjgUphMuhBJpcCh4bzWqVDJrkm+/nbocBRPTpnDgfcbN905Up1w8OSr1y5uu+0V1x0uSTpnyVJsnD3yHatju/ORMSJSJK4FHGTbzLEIeBAnajHKapje3d5xVOpDJ46tGjxJ055+Z+/+iPL3/qnwyK3rVyr6aqg2ZgDanWMO01TIi2CZ98F490uwdPqGHU6tVswS8Nnv5/rSxN9mQxMzOW79B04z/fpXxo+ZGEX3g0aBxf62yxl4fnyFjUOWRMTJyuc53qECcRnmfVdeNQ0fPibW44/9MjDrxkY7D935/Ztqqp5kiSJOElBw8xV+0ckfJcC29D67E5AEFF1idOErDrqs+qoH1x46AVLK31rP3Xjtje84Wz56hyCh14wlUgX7ermcrzLne/UhLFvGLMKcCJwPHBc2NwdCjxukvOrwAPADuDB0DaEv+lB7tVL77It8zw9gMqnkyeQTPNcafHc2bhXL45965oGVTcskn/qxm1P6e8fWJNWKk8Y2fZoVRKXOpckIor5MpoyQQ60P0ECNK6DCcF8ICRJHapuz87HsiTtP3zBwsWrr7lx+5++7mz52FrV9Fwhj06UsyBoHw8sbwKsRv+TncC3gT1t2j2141meCjwLGGty7twAbGRmzWHx2o8DzgaGmLpfkgC3Yr5W0+nfAPDC0IeM3qLbgJ9PQ1hJg2bBYVrjs4BnA2cE0HA0puGdqtZ8N2Zq3RzAw8/CfLsj/KYtAggBnhHmfLPv0gG7gB8AD83QvO8L8/z4Jq+tYWxHgG8AYyklldShtFLVrRLxH79h5PShhUNfVu+X7R15rOrSpEIADBEPSAP0lf3wfhWtKycAFUF8fZPgkkrqs6of3btzYHDR4o9+9sbt6bkiV5nWY8a1LZFZPBv4CFP3kYlMdRR4F3DtHANWFxju8Zhv0Dmhb1PVvuXA2wJwmI3xvhj4P2EHOxWtqw+M9BvAHwSg1iyjj8cvxvyvnk/z/ledSnEMrwzgwTc5Po2AYSlwJvCKMJeODX9rvGdeWAsH6teC0E4M4z6GOX3fDvxbEN6/apgLUzGHCzAMvBMYb2K+x/m0BXjTDACHeK0B4DLgxYG3NNO/SliP3y+BQ0mdy3lUBdATrt96RF9fskZ9vmx0z0jm0krFtAyGFiJgkKBFqAMI2VfroOE4r2hY5qKgrrA8UEid09z7vXtGtH/Bwvd/6sYdm4bPlq8WnTNnUJARFulgaM0w64XAnwI/xKKA5iDqpXZPB7whMCkF+pu4RmRUzOAzxOsuCX1cytRNtfG4F4Yd5g3T6GcShNhA2BG6HlrGgy2c4wqA4RjgJcArgXMxf7ziO/ATtwtTBl1aaBLm5nGhnRcE5OoAIn5W6NfBzBAS3uNg+Fea6I+E50tneG0uCJq1VtwShuL87KVJWlIP0Zo1OBHoG1j4TwNDQ08e3bOz6pJKWjeYmGmiBhoEc4p0AVA4+y5St0zUlomT2m92XgAgheNd4pz6XLLqqBtasOBjn1778OnDw5Kr6mysGS0wRp1iiwL36cBbqY3OnO04zwb+cBJGPZWWM/M+B1HQPz3sYrXJsVZMbf6KKexIDzZWeQvvu5ObLzxXM+8jgoahoMn5HHB1GONFDdeOQMG1MNfjvZIGQBB3/qcBfwt8HlgZNGd+isK2lXfZyni1Stk0+6clcCipIynu7D/zo5HX9g0u+N3dI9sylyQVcYoL2gZx4BBcBAGuroGI34vNxZbEY2QCgJB4biI1IOKS1FXHx3InPC4ZGrhSVeWKK2Z1595q+/2wc5pt59zIVA8Jmo/jC31o9hlmup8+CI7zgcMKWpKp9q+odVjG9BzLpYdbMyDOA88FPgV8NAC6SoPQnglALIVrRwDugScAVwD/ipmzpmLKmo3xmiu+IkW1UEkldQypqgwP4z95/dYjkiRdWR0bBdTVtAZEYS8FNl8ADCJ1EFADEfUGEWREjUP98wRzB6AoLknS3bu2530DAxde8+Mdr1m1Svzq1dqpdujIgI/A8ogcMcvgId7/vwEvo3OjtGKfjg0CYTrPeiZmJ4feDKmcaYo7/oWYb8AXgFdjqv68cIzM4txwBe2HD+/3GmAVFo6u8112lsChpI6iNWtwIJr0LXxT/+DgSVl1byYucdEkIRZGua/WwEldE5EUtA0RSETNQ9A4uJo2onCdCWYP01BY0KbgfU6S9L3rfV/61aIVK/DBB6OTwcP5wGtmmZd44InA2zE7b6eHd58XdpWtCP04zhXgAlq3G893+eOxKKIPAP/ARLNA0gH9i9qpJcBfAR/HshD7+fyuS+BQUiepG2R4WPKPfO3nSxLnXl8d24ulbaqbD8T+V0gjbcK+ZrJIotZgImCIIKJR4xCvywTtg9S0DuIUcUkytmeXr/RVnnXccSe+VETUAE5HUxoE+NNnSesQHSDfjoXJdXIOEx+AzW+HPk9X4L8kAKZ5vxNtATQ8E/gk5khbYaJpq1OAuCvMkUuBz2AmlXkLFF0bmcZsO950tAikfY5OdNA7mtGxXx2E8eKjl72sb2DglPHRPV5c4kQUVAsRFHWHRqnbMEzgT/B7qDs7RrNF9HWogYqif0MhrLOm1Qh4AmedyPPs9QBrWNPJ8y/ukk4D/ghT+84kk4u774swM0UnM9TI834LC3ud7nODOUlezPQSB81H0PC8IITP4+ChlJ2wpiIPfD5wFWammpfgoR0vqZgsY6Zb9IKtdMFuL3rtdoqzTLvGPpm5hWLCOM/8JYAiorUEkK4QXunqWoIICCZoCuJnN4nGofh7I3hwhhJquSFqKg0lSZyMj+0VhOd88id7T1ozPJyvXLmyk3eXkdG9Ogi1mU6idCTwDkyl28nMNPbtIizcbzoqZymc/xLq9u/SXHFw0PBcTO3/FOqOqp0+blH7kAdNyV9g0R7zzmyRtmkwd2MJM2a6GmSOxTrfiiVLoYO0D8UwrXuBW7AkIK1mucww7/TT2vCePBbX/9g03k+Mrf9leK72Dp6qiEj+8bUjhzvnnl0dHxXnnCAKIhabWdv+U/seHRydm2iGqB0z4QFC/gcFnCWCUg3nqKK5IKKoSPgh/AuoivP5uB9auPTQ6s6Rc4DfLF9+hVu1apXvYCbnsQRDlwE3AvcVGHe77/Um4AV0tokiPvspYZfbjhwRcZKdgeWD+BfmJn9GN4GGUzF/hk43ae2PD8Ysrd/DKjTPxJrqaeCgWJrM9wD/PIsMcQx4tMOAQ5E+B3xzmn1TzOHqr7HwulY0EFG19m+YR/AIdXtdK/1xYaHsaPfYrwlIPnGjT3LpomOq43uRgh1CG1wRoJgESupsSSaGV07gWsGf0XutidV4rsY6FjpRHIgDvCWmFkly56SSJDwd4Dqu6/T1LYXd3eux7IjtXC/F3eObAkPtBgb6AiwtcDtU43GMF2FOkqvpvdTR7ZyLhwH/iOX5mAnQsL9iVe0oqRC1SeNhLV3NPPVrmQ5wiC/9Vizmdnu5Nmq0M7R20JXAJTSvAo7H3gv8r6Ap6Fh67Or1Dsgrlf5lSVIZGPe7c0mSpCa8VesmCoAJvg00ZI8sJnQqDFfIGFnTOggghb9JuAcKvqZsMJDiwHt13uekfQPLYKW7YvnyfFXnM+v471vCDunGNu60Y8rkP8HS93by7rGogXkJdUe8dmpInx8AyfoWdqHt8mua7vO0A1jqfvpTwcKEL2rzXCmOmzvIOPjC79LCM3ngQ6HpfNUutcNUsbfhRczWIHbyy2oHM4qagXGml1FsR9AKuRliDG2h0047UwFy1aPTNEHEeRFJatENFHwPRAoOknWwANQdIyUWvZKJI5rXC1X4Ay37CCQCqDCFhEie5zjkcR+49ncXishIMLF0+lz0WDrdP8GKMu1q01pVLDf/K+h823583tOwAmK0sb9xrUYTyPoW+hb9iKQHeFdDovcaiLoYy2rarmdUJibuAqsbsgszZY9Sj6AZwNItL2wAEVMBEMX01F8I2obdTEwEVgKHFhdku+qZ9wK1Szi3IzQpMqRmC83MKtXU/poNaOx21AYU16daYqbGIlZK3X8ynt7o46D7AQo1V4aCT8OEiV3QPKjPAVk0cIjv66L5WCzm9DuYJ7ubxlyIguB0zH9ioEu0DWAhmEe2GThQECAvx/wctk5xve0CPovVFxljeo6a52ORIq0Is3jODsy0eX/gG9OZI9cV+Ngy4G+wstfTnSuNgOGRAIhjNc6NWNGq+zGz0bFYMrQTg0boaViY8tIpAoh4r28AfwlsY577sZRFruYPCOlaEo1ZIusREBM4o9RlvhyEXUZHSDQ4QhZG58CcQANukW7cXkTBGavjfR+4m9acuuLj92FRFE+mexzcHoepyWUG+hyBWAzz/PJBppQWgMPH29SHp2H1FU5v8vliX/YC78Uqmra7bsIbsfLq7QANUchvxkKxvgP8OAj0yeixhu+HA88BXoRFHR3VcG0atBIuXP+vsQqW884ZcrLJXlJJHS3yNORxqG39Zd/VPRXQYMdp1B00ia4kYAft5rVeLII11RLS+wMhF2KZKbtJVXsBlvWPGepzLF18Ec35UBTTHE+n3Urdl0lbeK9bga8E0JC2qU9goYuvoT3+F4KZIP45CP13A/8ZQEOx4JUc4PsjwNfCucMBfIyzbx6OqGnYgNVe+Tnd4wBcAoeS5gMtN+4lzktAAqpYOEUj9/B6cImvFj0RsYYWTBD1vx2YvRqXarB/GHTwO3fu6mYN1uux4kzaAr/wYed+Gc2Vop5rGgBeyszG3cfxPBdTi08VoER1/nSbTJOnF/MptKM/UfD+PnDSNLUN8fnuDUL8LZh5h0n6rA1j2vg9mm+rwPVYRNBfBuDkGo57AHhXuJdjdipYlsChpJKanJLbQrjkhM19zeW8IPQnAIgANOzv9d9UtQYg1Kv9FvM3hAvXMEUtZ0O8QdRMhCaqSZqSJOn9lSUP7ZypbesMr3fFQuLehalsW3mMP8RCGrsBNEQ7/bOol8+WGRxfAmh4VYs7/3YAl+leQ9s4157K9J1nI+D4FZaa+mOYE2S8R95kn+M5EUDsAN6PlfK+qaCZ2IbVp/gaZVbQEjiU1Hl0xsOEqIrRzXl13IMGpmDCvhZCuY+Q16I/40TNgtf9JvG28yLYmPi5zj4bkjqo+CRJGB8f23zZhReOrVZN6OyIigNpDc4Hfpd9Mlcc9LwXYPbqpEXQMZtULJ99QdCUzGSf4/1i4atDmZ9e99G3I8HMNsumMe4RNPwaeBvwXSYWn5ouSMoLQOG/gibjx5ij6ocwk0iZCXQGgINQApCSpkm3rwh+ik5+mat/1CWpm4gIJigXJmwvNPzB54rmkGdKnik+U/Kqr7dcrWUGRiZeZGKrRVnUQAioqlOFvFr9KcBjV3f1vI8FqZ42BeEWBcEizERxAt2TZlepO0U2u5tupT5LHKtnBA1HFyqm2gYcjipoG6aTdO4hzB9hXQHAthOw+wJAuQVz+v1TLFFVPgeao3kBHLLQ2uXgcyAnm5J6lFaJ+JUr1W351pG/ycbHN1Qq/epVPRrSQYdGg69CND94D0kClQHoHxL6Bx2VgYmtf9AxMCT0D0ES4onyXNFcG/weCtoMXwMmKg43PjY6pt7i9Le+uWvtncXUy2/HIiQOBB6iIPjvmFNkt+yiYx+fhanMm93kCM2HQ8exWor5OlSYf1qHuEifiqWVbjXrLUFwX4Vl4p1OCPFUAYRg5oqPYpl2S9AwCbUjHPOo0HZSOo6UNA064wxkeFjyf7loz9eTSt/Z7N0JuKCK0HoiJm+ZHDxKmjr6Bo0n7dqubH8wY9sDGdsfVEZ3T9RkDixwLDgElh6DHnpUvyxa6hgcgvExoTo28dioxYihm6q5VvoHpTpW3XDMUUtuAljV3QylWATrm1js/mSMOaqETw07sUG6I/wyPl8f8Mrwb7P9fgSr8fJErG5Ms/QSzB5/xywIvU6kF4X50mpeCYdlOv1kYXM602NY7KvOwZyVbrj+dIBD0fnlfVjSk5nI0e6wWOf11Is0lQiwB+n22+297qo+9u8L9hx6uXPpkM8Vl8gEs4H39rV/0FEdy3XDzTmbfpXJgxtzdo34Wm4GacjrFhUWLkEGBsZZclTCCU9MOfFJKYccmZCNeapjWruVat010qvXSt+A8zmfv/A0GVu9WpNhkW4GysUaC+8CfsS+RbCkwCfeTncVJYrP9yTML6NZwZEDHw6C/51YDH8z/iAKPAEzV9wxj3hWXHULsJwWjubNWsW6OP/KxGiH2dSYzDZ56knA2gki4nWydsnotA0dEuBSLJ6u3dUxfdgpbMAcY9aXwKF3adUq8arqROSOa2/a/e+DCxa/dveuxzLVNBVV1JuWYWDIkWdw2w/GuOPmcXnsgRzFUemHvgWunoY6oodCblMVM2/kGTywOWfL3Rm3rhOWnVHhjOdVOOSIhLE9OT6vYxXNc02TihvfO/qo3z56LdR9MnqAyXus4NAbsZomk/3+YiykrpueOfb1UuD4Fna9G7GcBg8AX8VyXyxpYgyi8HsVlpRpxzzhXfEZn4ilOYfWs1jeCnxpHoxbHJ9DseRdN9Be7X0cu2OphwnPKXAodmrpDA7sUsosl/OC1qyxRTRarV6VpOmrnEv70Fy9OhGU/iHH/ffk3PStMR66Jyfpg74FCc5ZVkcDB6HiZWOmqMJnSaGvIlQGleq48osfjvGbX1R56gv7eNJzUhVBsvEAP9TnQwuXpnt37/nk61609N4e0DZMMiK8EcvAd0Nhx+wxM+S7aE+q4NkWXkeFHX8SGHHShNC6Dbg9fL4H+ClWh2KqACQe83TMx+K782wpnxaAVivyJM6/bwAPzrEWYDbX4SLgciy/xO3U/WPapQG6DMv0Ou2KnmkbH3omXmxkVGWZ2nlCw8OSB63DTz7zwx3XLDzkkLeObHskSysurQygt3x3TG65rooqDCySmllCfUhL7WRyJZ80fIlmCAWXCEOLHdUq/PDro9z764q84JX9DC10jO3JfGVgMBndu/veXSOjH1RVueKKnmJikbEch6nkf44V8InM+w0Fgem67JnOCUJ7qn2Px1WxSqJjAWzcj5lyzm+Cz0VtzeFYfZD5BhxOxfxCWnUM3Q2sbQAS84FOAj6COWa2s3poBcvfAm2wCqRtXqwzwQBm2mGkpA6jK64AVGVs/db/kY5Wli9YvOT00dERf/2XqnLnT6oMLnK4JNSNiKYIJxP838VNPmU0Zn7SkEI6WF+9QpIoQ4sdW++u8q3PeM5Z0a9LjhScG5Tq2M53v+2Cw+87bLUmq1Z1vLahVWe0i7EUvJ8MfzsLi2tvVlVcrCY422s3CuwFmIllqAlNSezz/VhMP9SzBf4Qc5Y8vInxjWP2XCyXwT30dp2D4pgcX9j8JS3M3buwuhC9rm2YbLO8ILRO4AuTUhnmWFLH0apV4lesWePe8qxjH9Hx7M1Jn3/gB1/J3R0/qjK02NWKTdWLEUstaFecGGgQJm0i4feEuoYisVLciOA9DC4UdmzL+eY1e/2uxwaRZOcHf/+sQ9eoajI83BUmima1gBEYDAatw5OwaoKXYzbRZhhOPNYxN4A/3vOJwMua3NTE476HpTaGuq35xqCNoQnBH3fKZ2ARFvNBAPoA1pZM8zo/Z/9Fq3qZHJOnrWtHa9t6LP0GSupIWjM8nK9YrclrnyPfP/8V992U9i+4eOHiUVVFJAmaBlfXNIgI6tRSRIuGEhc6qVwQLzWthKLgQZKwXgV8Dn0Dqupd8sWrRvZk2ejVCHSJiSLHEuYsweozTJVhFIXctZiq9PktMJzoH7AFeB5mt53NPAbxXhcARzcBHOJ5GVY0aU9BO+CwiK6bMSdwN8VnKmaSfBGwmvlRknkggFCm8d7vwkL856MzfMdr2EuNQ0kdSStYnawZlvz0k7f88caf9V/0yJadFpfpCjO3YJ7QJAAGl6POEsHZ50KTvPB3jzq18xMmpgYScImT3TvzfNNtyeCmW5OrTjxh48CqVWtk0qpbnUGRuf4C+D3g7zFbfbOahwSrZrg8bCykyfvfjRXRuhS4rsn7t4PhKrAYS1TVjFlACzvdW/Zz7W9SDwlvVggsx0LXu0IwTFPgHYI5006H7mN+puvuGrVISSV1GK1O1jCcLzt281O9pO/pHxqTHY8qWzepiAguFYuciKDBKd7l+BogyPFp/Fxoia//XTzeZWjiC0p1M2OkFWFkm3L/Rp8gu7R/8JDlfS69HIZzWNPpa+Y2TNX+PuCLLe7YPM3Z4aMqdAzLuHdz+L51lgVlUUif0eK9f4CFYhZrIcTn+xkWItgKmFmK+Vwk80AgDoU2Hdrd4yCrBA4lldRe3r9CTznlzv6kP7nSub5FOZlP+5yMPKZs3qiMjkFaqYMGTXLzcgxaBHUexO8LHGp/V3AeXNBQiH12FSut9dB9cP9mwDkkdZLr9lySvnc/4fi7ngUrPKxOOngAc0xVvAfLtf8bmvdKbzbNe/R8Xwt8mrmrX6NBS3JpENRTTTwU+78DC0fNmDwuZzvwH4WxbCanA0ELcjRlHpqSSuBQUknto3PO+V4K4sW7i1LXd37OrkycS1Qg7Rf27obNd3seflDxTpG+HHGKita1Dc6TJ5NoHMJv8V8vHkSRiofEs3tE2Xy38sgj4CrRyVJExatz/YO+MvRuEIUV2sEmiwgeBMs98GHMZNGucsn7E7r3By3HNuqVEZfMMi9TrGjX81t4BrDY+RsmAQVa0Bxcj/lvtGKuOAUL6ZwvO4CSSuAwpcU3k62keUDr1l3nYW0qLHq7OhFxKkhNiJP0CeqEhx/ybN5Y5ZFtVca9R1IPqZkj1AXtQ5KjaVZvBZMFqSepKLl4RnZX2XzfOPduyRgdVyr91K39TpDEJV5HvJPkt08+4b5n1oM4O35NK3ANFlo4E7HwtYzcmIliHfXQu37qZaxnc/2eg8XCN2MOiGaJGzHb+mTmnaIPx3eafK5iiOjFQSPUyzQe2nRooOSGnUtpGxnITCLXEr3OC1IH4k9d9obnkfACZZcX5xJxYumfnYTwSY8kGXvGPbu25mwbqTK4SFm0IKFvAJI+j0u0lhyqRokHbyGXY3uEkZ1VRncJ1d0OzYUk9YgIPguAwddmn6jLvUh/vyP7Q9vJr+m0ORnj5Y8P67oavj8KfAA4EziS9trXo7ZhHZb7obFA0GzlK4iC+Rjg5Q19m8ozCJaj4WsHOS7BbO/XYZVC+2g+k+RzgGcD36f3cjrE1bYtjOd0ZMMxhXldUo8CB5mhFzzVojIl9QaFOMn0lU4G0lxGcxecINWBJKBijo3qPJIYQKiOe0a352zfWYUkZ2BISPvD1JEC31LBV4XqGFRHwXuH844kTRCXoFVv93GpbTlDSW9RAedE/R5ALzrxxFv+ZtOmZ2w3c4V0mjasv0F4S9A4fBz4n20E+TFM8SHMRLF1BvnAVOaNBoH8vBZ5xs+YPJpiMn50fTj+LKaeyjqO2XFYaOYN9K4mdSy06dBRYS6PUdYn6ingEJnSKPAZ6mV5200JVh3z17Og3Shp7jYrAvhTTrmzXzQ7TxlDHKJB2yDOIUjd3BB8Grx4SHNc4kNkhWfXuEerwUlyAtsWxNQHJGmCU3C5oJki4lEnBhacRzSxpFBOUCvH6ZSqOgaPTeWQs4BvUc8q2Im7vuJnBT6B5TY4m+nXnNACSPhUYSzmCjR4TLV9Kc2Vzy5qC76E5Q040HNEHdQ9WArqs2jOHBLfx3nA1ZivRC9pHaKWZw8WtjodegoW0vngPGSGMzUf2iaf2wEcbgWumMUXXAKHntU2iK9WNz6pPx1YpjKOiFiOSOeCn77larB8DeGz86iAl+jboEjiQ9SE3webiDrEh8yTOWjIHKkq5mTpFRFztoxVNg25KEAuyUAquuss4FtnnrnerV9PN6SfdkFIvRf4LNOrIVC85nrMt2EyQd3HzBa+o0Gz8HgsDLMV2oCZDqbCXKOg/0/MXHEEzZsrzsRqaGzpzXVMjlUVbUXzUxyjE4NcmU8ah66oCdMOU8VI0DokM/iCZ9NeWtIc0Dlc59aBr6icLLjFSu4R52LNCXGgoiEqIjg/xkiKxNcSOmkxmiLNJxi7JHdW1cpLDVSoWhZKFWeaBieod7WS2jjLNKkiAUDkCANnAKxff2beRcwomiz+FfijwnpqteTxNuA9WGpm13A9DcBhSYv3aLY/ClxE3Rmz2fTYt2JOj8rBC+rF5/wp5j/SLHCI2pFXYU6Wu3tMMMbnuBczM/S3AFI1gNvnAT+ZZ7xfgDswJ920TfNCsbwaT6O5bLIzChykgDJLW1RJLSKH5bAO1PF4SfpQ2ZsjckDkrTX3Ah9mYUELkeaQ5LVjRMU+ewea2/d4DVHEefstXEfFIy4JFpSav4Qjz3GSHnvMMV8Zuv9+2dOhfg66n13MKOYouRyrR9FKdEi81mrgKx2w5jUAlJdiqZ2bMcPEZ382VszrF1Ng1lH4vxA4tgVgFI+9AKsgeQu9Wf3xNuBhzKejWXkS3+FLMafbnfuZ172maZCg+Xp3ALLtAA5xffYD78Bq0fR1gsah119oSbMJt50b3EcURVYb8i4QTAlEjUPxezRjOI9P8ppMV5U6dxZnzpUaTBS+AYyImSuKy1mcgAeVHA+HiRw1iNlyO2mnApZu+SjMDt+4UxbgTuCfAoAYbHL3ERn6z4EPhd35XNro473PwdJktyrET8TMONuauO/hTEhS3vQ9j8BCM28pvJte4KPxGe7CIiuOo7V6J2ARKC8NILWXS2vHdbUN+IegZZkJuhLzcXoe0/RzKhNAldRFqOJgv0fTRV7whWjIHHnA1eAPzpusDlbi/Vinrp0+Dl6S93MtaAsi898VGNAvmbsoimKf+rCkSs1kitzfdY6eYjtymrwzL+yoD+vR1fpgAKmtrnQfQPDrMCfJuUjTPdupAHZj2UljFhlpU4tJ9fdi2VHbgthLKqmzwYJYmWzVAy9rPYDFYEqrXw/GJ4K/hYosZGEn7/j0AL+5wKA+iNVkmOpOLjLuL2ERVHMdIh1rPpyCqf2nO8uiH9VsJKWLfPeJ1DNJ9krIeTHi5gdYIqhWtAXxnPOAVzP7ToPC7CcfFOrmiZlosaRfCRxK6jXyE1loMYtTY5bnhmUt3iHeBT8GsX/jZxX7LWgmatfTRuAwCRts4B0q6m3j3bWM3WHhhDEdNQdhkFGteSfwfjrDoS9qF84FTmuD8C3uzKbapnMvH3bSL6GeSKqX4D6YvX7bFObXgebqAPBnwHNpLmdGO0DDUg6uvZuJ9TkXm4oSOJTUxbDBy4iJhIIUD9NdkDoIKIABUZngnmi/heROWUpSreCy1I7PE2vF6zDx3PibEswdCKqKKoqkCMmDo+kD3YocijuQazDPfjmIliLma7kSC8Gc69wDRca+orA77aZde+zreVjOgq4Iw2tS+G3AkmVNRz4p5kR6JebQmxcA3ky8k3jPp2L5iVaUsrIEDiV1+oSU7D7146jH1WwT2gDFVeoAAUJuBhP2zjskS5DMQZbWtA6SpZAlSC51rUQECl5q30OoRQAlUldQWFORBKT6wJYtw3tDPstu3CkW0yy/F/N+L4KBRhWnAN/AQjlnelfUDJ0FPKPLd+WPx5w7e8n5r2gS+3fq2R9bHac8aBw+Rj0aqJ3yqwgYPGb6+hjmvPo2zBzmKeVlCRxK6ixat86YgahsAL9DSByqql5r4sv5qGHAskB6h+QhZFKd5WnwDhe0Ci5LkGoagESCy1LEJwYcVHB53bQhui+gAGNZWgMwFs6Z+7HbAc48c33SxUMemfv3gf/XIMyKqniHxeRfidlnOkHAxb69HFhE606Rc01RAF6KRWn0otbhRuBmpudIm4RzXwD8C1aeXAvvvVUNRCNgWIzlOPl0ACoZ8FvAW7FQX6Usf1ACh5I6agPmQaUytOdX3lfvdtJnpgE1wa3Bbc2CJVxN+KMCuUN8gssTyB1E4JAnJFmKq6a48F3yBCKo8Elds2DpJ+36PmgwvBT23QqQ+Hw881lyM8BJ68/shcQ0CnwESw6lmOf1eKHtxPwaftQhoCH24RQstKybGXns+1OBp/fYgo4gaDPwH9R9aab73p+OpTn/O+AMJjq1NkYRHKzFcwexCJdrA0A+rkHD8Dos90mZdiBQWg5BSZ0EZH/5yyePn/L4+9ei/c9Uv0fFOVBQr6FiZWKWCucRb+W2xbsJuksNtSbU6QTuHH0aJHc1XwbJk5oWwlpSi64wv4ag8fDqRfuclz1b8x35DQBruj+jXdyxbQEuD7urYlGhBAsP+w6dlWtAgZdhautu3gXGXfhCzJb+7R4TTvHdfB5T+5/D9FT+cbyOCvP1UuCLwFrgJppPFHV4AAQXh7aksC5c4fPhwJ8Dt1Mv5javQUQJHErqIFoTuEO2Js/3XiaJcxpSREsxOEoFlycmyXyoK+FdXc/rBZ/4oMPQgk7D2VbDm3Ok5mbWwLs6mAgmEPUK3lvSJ69o7tUxCN5/bdOOE7aDJiB5Dwx6ZO43h3awYztB0C4BXoypj1vxtPcz9CzSolAUTA1/BpYfo1cKX8W5dR9WnfW3mH7K46LW63Tgb4E/wDJV3oJl/7wD89sZC5oODXMlDaDjyVgtjGcGDcYhDUDaTTLnlgfNw/s6aD2UwKGkkmCFB5UN91z901NPfsU6x4Lzfb4rx0mCBhEhghNX2xL4uHwTXyuFrU5wwW+xmHKaEJVRBwmu/j36S3hnF/UGWNR7zE6SSJ6NVn2291M9yDSKat79/d4Jzxvh43PC7pUWBbWbhbFs9plOxmz3t9N7dnQBvgZ8IQj56fqkSMO8PC60lwatw+4AGnZiphIC2DwSM0ssZmKYpT8A6Iv3qmBpyf8rAOxezmRZAoeSuoq/6Ao0WcNbqj578VVO+s/BiZAHZwdxoYi1AQMFnGgtelMTQUTxKrZNcH4iJwgah/q/0VTh6uBBHZormmttX6q5zx1LEq97V99977W3hmiKXiu80yng4GCagj7M6z06Rbomnk8wh7cbseqN7XRuzYFlWNXLZgBEjBpIsdDMT2PRLr2kdXBBiP9j0Do8ifZEKTT6KrgwLxYVjnnyAfoVz3FTuI/HUpP/GfBGeq84WQkcSupeWoPkoO7uTVd85dRlb/5O4ha9NPfbc+cqwTahQXEQnBdJcCrBbOHQxONCRETi3T6mCiJgCAmiZEITM1HkatEUuYLPFU1F/fgO1T3vhVUZXFE6Fc8+RUF6HGaPblVb8QGsVse2Nu4a47WPxhxJL25S8xD78dwAPL7ZY+8u7uh/Afxv4CosB0e7/FOkAAK14V/ZjzZImgSO8R2/EvOpuHq+L8aSSupAWuVR/1feZ485XxH1uWru8TlBsJspIYZUuizFeWfRErGF6InYyC3HgytEXbha+KbYvi9TAw/BKVJzzYVFLs9G37PhnpNuDb4NZYn3udm5gjlFnjiJUJjKufeHHf19mCp7N1aobLptN5Yg6zdYaOtjTe5G47GHYCmo++m9UtJR8/BFrJDT+Azt2IuRFY3RFcXvrVyX8G7eSd0xd17K0BI4lNSBJB402XDP8bdqtuevYaHTnAxVyD2aUxfyOTWQEM0Olq8hJoJKa60Yklls5ILmoBE0eNAcfJ5lTg5NNR/7dlW/8wEzUVCChjmYEIFJLwAuwcwVzdjJo3D6L2AT++araEeL1/s+5qjXrFCM13gFlhSqF/mzYs6KVwGfYGLCsW6Zhx5zYv3jwjwsgUNJJXXIGs1hdbLhnhM/nmc7Ppi4JRWf+aoJda37IeQezT3kBA1DWvt3slY7JmSR1Jxwvi9cFzTLs0QXpb46dqeOjb5h06bXj1LLJFHSHDBssMiDpzSpbYjHjgHfw5JYRQHQzgJCUYA8hoWvxtTI2uQznoL5OnSTQG0GOAjm73A5lj+kWBSrm57jtdSLq807OVoCh5I6mIY9qLtr44mX5dU9n0zksIrPtKq595orWtW69iFXNPNohqWVzh2SNbQ8ZJcM52gWtRaWYEqDCcRn1cyxKPWZ3jWW7/ntDVtOuK+L00v3Eq+6APMjaEbbEI+9DbhhlgDO16kXd2qGorPeJVhuh17MVBifaQQLpfwQ9Qqavkv6Llj0y+YeBXglcCip65mMwkq3+O4tb8vHH/tYwiEVcnGaZTlqQt9n3swMQfBrFkFF0B4ER0etFv/uQwvHZ+YI6au+msihqeb6s2xs+4WbNi37FaxNS7+GOeVRHjgJq4TZKqP+PnD3DO9uY7/uBta10NcIEp6GRR80q1nppnXtgB3AX4T2YEFD04mC2BdAw5exsNJfME8jK2Ltb8/EtJ1THchuQlvF55QWzpvrEsLNvh/tjUktCsp6yNgobzt12X23OzfwdyJucZ7tyiVBxDmnMc/DPu5PiojU600UZm50glRv/zlNU8eCSp7t/bfde+99y9atZz0KqxM4Nyvl95yuW4DnB4HazIYnCqiHqUcqzOSaiPfbjuUt+B1ay+lwFJaT4Hs9/F6jdmUci3S5C1iFJWZqFNSdABgcZob6ROhvMYPkvKtf4QJ4GAifE+reqAdrafi3r4tAksMSebgmWkI969icSM4W309SeD9dPrGjiUDdho3HXjXuR17kM13ndHEi+ZDTqs+1muX4XOsaBGraBp/VNQ8100TmVbPca6ZVyROX6KGp5jzss5F3bLj7na820KAJDOeUNJeUY8l7LqVe7KhZp8hfUjdTzBaQXg/8ugUNRxRE59H7VRmL4ODrwGsw08W2whZgLjZtRd+VqPG6EXgDZl7ZSpkAim2Yai1tQeNQwew83aDGfZR6GFazSWN8OH+mdyyT0RhW1/4ILHlNs+/nHqZfYKZTwIPC2nTjxpN/Am9+0cknXPEaSZN3JG7o2eIqaL4XZUyDmsFarMGNWMEsvKAignOiC0Skz3kd3aL5yOfz0e0fvHvrUzbDylBBS0rQ0Bn0xKBxoIUdfB52/7tmae1GnvEr4HosLXKz5grF0iGfG3biva5RiuDhLizB0reBNwWtS1+BnzGDWghl8gyqt2Ll5D8DPFTow7w2XabAVzh4jvoDvfCdWCzzbKL5ZvsJVo71ey2+cMUyzc3m88V+bgV+L4CAZvvssGqHD3Tw+2mSzs1ME0B2971yLafcufrUqrtQ0kMuUbKXiOs7WhgQkWTyx1VBGcfno7uE7JZMx79UzXd+6d57n/CbcEDY1c6pI2Rjxb9m5ksnMbRWTGyTPcMlWDbAvAnwEHfq9wPfnUXQH9ddjkVXDGMpjrMmNiyx7xdgBaJ2NtF3T/Mm2bmObIjP5cIm52vAD4GLgqbpBVjCKCYBEc2CyUagUAQj8TqjQSauAb4VNEfF++gU1q5vYb7PhnbFt9C/feZHiqU3fWQegKQHQ+s2Ggu7l5Lqm7IgQFYn3HXa2AYr2/sfxx1329KBdOlTkD1nQH46uCMb+PmIOLfJIxtc5m++894vb4a3VAHOQdN1IaizQwB9s+rpePwQnaHalmn0pa+w0zwtCI+0xfG4HtPYzSZwjvf5HnAn5ujoWuj7JVjI4romgMMgU0ujPBnN9dwpFrl9FPgs8FXgGVj10HOBY7GIkwMBzamOcRFwjGAa6bUBLKwP3+OxU3Xa7G9h/OOxC2hvGvQDrclW3vOCOGZpm9Q+3bCTlTbsOHQO+97qeUrP2uKGc1A5h+uSdSz3W7bItsBk1031CuewNl3Hcr8O6QQHyPieIgPLad40tYl6eeG5fIY9QXAe3uRzxGeJTPvxQfhuovnaFA5YzeyZKRp3aI9iKu6dtO5Ed1STvGd9YPDNmmQTrLx6s6WpZwpARH79WJhHPwCOAc7GUnOfjmUQfdwkQGIq9EiYY1vCxuxHWGnuB8PYFQW6n+KcB/OnuS5oTprRMKWYKeTRGRz/KvDjcO2syflRCWM1Nh2BVFJJHUhaUzmew3WyjuVhDQMs5xxDFGoayBW+g/My9GPph5uNAJLAHEaoq/Xnihzm1NiMQ2MxEmhnYFJDTKxk2AzlWMhfPsfvchHNR3LFcYjvc6pzdXHQOjQD1iLIqoZx76Qoov2ZB5ZiFUWPC+DhSOCwoJFIJrnGWAAKUcO+qdB2TfGeU92VL2jh3FiAbScz55MmAWQNtACE4/zYTt1xrKSSSiqppJI6loR9y2k3Ul8ATu4AgDpr8dolFej/Ayf+1H7Ly8zgAAAAAElFTkSuQmCC" alt="FitMatch"></div>
     <p class="key">FitMatch turns a body scan into about 70 athletic measurements and a 3D model inside the athlete profile.</p>
@@ -370,7 +372,7 @@ footer p{margin:0;padding-top:22px;border-top:1px solid var(--line-2)}
       <div class="step"><b>Results</b><span>Worker checks the partner every five minutes with growing waits, up to 20 tries.</span></div>
       <div class="step"><b>View</b><span>Measurements plus 3D model from a time-limited link.</span></div>
     </div>
-    <div class="ref"><div class="rh">Eligibility, privacy and deletion rules</div>
+    <div class="ref"><div class="rh"><span class="n">3.2</span>Eligibility, privacy and deletion rules</div>
 <div class="tw"><table>
       <thead><tr><th>Area</th><th>Detail</th></tr></thead>
       <tbody>
@@ -386,7 +388,7 @@ footer p{margin:0;padding-top:22px;border-top:1px solid var(--line-2)}
 </section>
 
 <section id="s4">
-  <div class="sh"><div class="no">04</div><h2><svg class="ic2" aria-hidden="true"><use href="#i-gauge"/></svg>P Score</h2><p>A 0 to 999 marketability index computed by a separate service.</p></div>
+  <div class="sh"><div class="no"><svg class="ic2" aria-hidden="true"><use href="#i-gauge"/></svg></div><div class="sx"><span class="sn">Section 04</span><h2>P Score</h2><p>A 0 to 999 marketability index computed by a separate service.</p></div></div>
   <div class="sb">
     <p class="key">Every athlete gets a 0 to 999 marketability score that brands and agents can compare.</p>
         <div class="gauge">
@@ -409,7 +411,7 @@ footer p{margin:0;padding-top:22px;border-top:1px solid var(--line-2)}
       <div class="bar"><span>Face recognition</span><div class="tr"><div class="fl" style="width:28.6%"></div></div><b>10%</b></div>
       <div class="bar"><span>Name recognition</span><div class="tr"><div class="fl" style="width:28.6%"></div></div><b>10%</b></div>
     </div>
-    <div class="ref"><div class="rh">How scores are calculated and kept current</div>
+    <div class="ref"><div class="rh"><span class="n">4.2</span>How scores are calculated and kept current</div>
 <div class="tw"><table>
       <thead><tr><th>Component</th><th>Inputs</th></tr></thead>
       <tbody>
@@ -427,7 +429,7 @@ footer p{margin:0;padding-top:22px;border-top:1px solid var(--line-2)}
 </section>
 
 <section id="s5">
-  <div class="sh"><div class="no">05</div><h2><svg class="ic2" aria-hidden="true"><use href="#i-spark"/></svg>AI and tokens</h2><p>Where AI is used, how it is controlled and what it costs.</p></div>
+  <div class="sh"><div class="no"><svg class="ic2" aria-hidden="true"><use href="#i-spark"/></svg></div><div class="sx"><span class="sn">Section 05</span><h2>AI and tokens</h2><p>Where AI is used, how it is controlled and what it costs.</p></div></div>
   <div class="sb">
     <p class="key">Thirteen AI features, powered by OpenAI GPT-4o, run through one controlled pipeline.</p>
     <div class="prov">
@@ -454,7 +456,7 @@ footer p{margin:0;padding-top:22px;border-top:1px solid var(--line-2)}
       <div class="bar"><span>Deal scout</span><div class="tr"><div class="fl" style="width:80%"></div></div><b>3,276</b></div>
       <div class="bar"><span>Other 9 features</span><div class="tr"><div class="fl hi" style="width:100%"></div></div><b>4,096</b></div>
     </div>
-    <div class="ref"><div class="rh">Full feature list</div>
+    <div class="ref"><div class="rh"><span class="n">5.3</span>Full feature list</div>
 <div class="tw"><table class="stk">
       <thead><tr><th>Feature</th><th>Used by</th><th class="n">Max output</th></tr></thead>
       <tbody>
@@ -472,7 +474,7 @@ footer p{margin:0;padding-top:22px;border-top:1px solid var(--line-2)}
 </div>
     
 
-<h3><span class="n">5.3</span>Approximate usage</h3>
+<h3><span class="n">5.4</span>Approximate usage</h3>
     <div class="glance">
       <div><b>1 to 5K</b><span>input tokens per call</span></div>
       <div><b>0.3 to 4K</b><span>output tokens per call</span></div>
@@ -482,7 +484,7 @@ footer p{margin:0;padding-top:22px;border-top:1px solid var(--line-2)}
     <p>Cost uses list prices: $0.0025 per 1,000 input tokens and $0.01 per 1,000 output tokens.</p>
     
 
-<div class="ref"><div class="rh"><span class="n">5.4</span>Controls</div>
+<div class="ref"><div class="rh"><span class="n">5.5</span>Controls</div>
 
     <ul class="l">
       <li>Per-minute limits in production: chat 20, search 15, offer analysis, draft, pitch and brief 10, contract review 5; other queries share 60 per minute. Global limits are 100 requests and 50 mutations per minute per caller.</li>
@@ -494,7 +496,7 @@ footer p{margin:0;padding-top:22px;border-top:1px solid var(--line-2)}
 </section>
 
 <section id="s6">
-  <div class="sh"><div class="no">06</div><h2><svg class="ic2" aria-hidden="true"><use href="#i-blocks"/></svg>Modules</h2><p>Backend domains, admin console, brand dashboard and the score API.</p></div>
+  <div class="sh"><div class="no"><svg class="ic2" aria-hidden="true"><use href="#i-blocks"/></svg></div><div class="sx"><span class="sn">Section 06</span><h2>Modules</h2><p>Backend domains, admin console, brand dashboard and the score API.</p></div></div>
   <div class="sb">
     <p class="key">402 operations across identity, offers, contracts, payments, social, notifications and administration.</p>
         <div class="glance">
@@ -545,7 +547,7 @@ footer p{margin:0;padding-top:22px;border-top:1px solid var(--line-2)}
 </section>
 
 <section id="s7">
-  <div class="sh"><div class="no">07</div><h2><svg class="ic2" aria-hidden="true"><use href="#i-coin"/></svg>Business model and ROI</h2><p>Revenue levers, a worked example, a what-if calculator and the cost base.</p></div>
+  <div class="sh"><div class="no"><svg class="ic2" aria-hidden="true"><use href="#i-coin"/></svg></div><div class="sx"><span class="sn">Section 07</span><h2>Business model and ROI</h2><p>Revenue levers, a worked example, a what-if calculator and the cost base.</p></div></div>
   <div class="sb">
     <p class="key">Three revenue levers: memberships of $150 to $1,500 a month, a 10% fee on each deal, and agent commission.</p>
 
@@ -629,7 +631,7 @@ footer p{margin:0;padding-top:22px;border-top:1px solid var(--line-2)}
       <div><b>~$1.1k</b><span>central estimate</span></div>
       <div><b>$0.005-0.05</b><span>AI cost per call</span></div>
     </div>
-    <div class="ref"><div class="rh">What the cost covers</div>
+    <div class="ref"><div class="rh"><span class="n">7.6</span>What the cost covers</div>
 <div class="tw"><table>
       <thead><tr><th>Cost line</th><th>What it covers</th></tr></thead>
       <tbody>
@@ -646,7 +648,7 @@ footer p{margin:0;padding-top:22px;border-top:1px solid var(--line-2)}
 </section>
 
 <section id="s8">
-  <div class="sh"><div class="no">08</div><h2><svg class="ic2" aria-hidden="true"><use href="#i-card"/></svg>Subscriptions</h2><p>Plans, prices and how membership is enforced.</p></div>
+  <div class="sh"><div class="no"><svg class="ic2" aria-hidden="true"><use href="#i-card"/></svg></div><div class="sx"><span class="sn">Section 08</span><h2>Subscriptions</h2><p>Plans, prices and how membership is enforced.</p></div></div>
   <div class="sb">
     <p class="key">Coach, Agent and Brand roles are sold by monthly or annual subscription; annual plans are 20% cheaper.</p>
 
@@ -690,7 +692,7 @@ footer p{margin:0;padding-top:22px;border-top:1px solid var(--line-2)}
 </section>
 
 <section id="s9">
-  <div class="sh"><div class="no">09</div><h2><svg class="ic2" aria-hidden="true"><use href="#i-swap"/></svg>Stakeholder value</h2><p>What each party gains, pays and can be measured on.</p></div>
+  <div class="sh"><div class="no"><svg class="ic2" aria-hidden="true"><use href="#i-swap"/></svg></div><div class="sx"><span class="sn">Section 09</span><h2>Stakeholder value</h2><p>What each party gains, pays and can be measured on.</p></div></div>
   <div class="sb">
     <p class="key">Athletes and parents join free; brands, agents and coaches pay; the business earns from memberships and a fee on every deal.</p>
         <div class="tw"><table class="stk">
@@ -709,7 +711,7 @@ footer p{margin:0;padding-top:22px;border-top:1px solid var(--line-2)}
 </section>
 
 <section id="s10">
-  <div class="sh"><div class="no">10</div><h2><svg class="ic2" aria-hidden="true"><use href="#i-layers"/></svg>Architecture</h2><p>How the apps, API, data and vendors fit together.</p></div>
+  <div class="sh"><div class="no"><svg class="ic2" aria-hidden="true"><use href="#i-layers"/></svg></div><div class="sx"><span class="sn">Section 10</span><h2>Architecture</h2><p>How the apps, API, data and vendors fit together.</p></div></div>
   <div class="sb">
     <p class="key">One GraphQL API is the single source of truth for the mobile app, web hub, brand dashboard, admin console and the P Score engine.</p>
 
@@ -801,7 +803,7 @@ footer p{margin:0;padding-top:22px;border-top:1px solid var(--line-2)}
 </section>
 
 <section id="s11">
-  <div class="sh"><div class="no">11</div><h2><svg class="ic2" aria-hidden="true"><use href="#i-cloud"/></svg>Cloud providers</h2><p>Where the platform runs and which vendors it uses.</p></div>
+  <div class="sh"><div class="no"><svg class="ic2" aria-hidden="true"><use href="#i-cloud"/></svg></div><div class="sx"><span class="sn">Section 11</span><h2>Cloud providers</h2><p>Where the platform runs and which vendors it uses.</p></div></div>
   <div class="sb">
     <p class="key">AWS runs the platform, Google Cloud delivers push notifications, and specialist vendors cover payments, e-signature, AI and body scans.</p>
 
@@ -843,7 +845,7 @@ footer p{margin:0;padding-top:22px;border-top:1px solid var(--line-2)}
 </section>
 
 <section id="s12">
-  <div class="sh"><div class="no">12</div><h2><svg class="ic2" aria-hidden="true"><use href="#i-code"/></svg>Tech stack</h2><p>Languages, frameworks and test coverage.</p></div>
+  <div class="sh"><div class="no"><svg class="ic2" aria-hidden="true"><use href="#i-code"/></svg></div><div class="sx"><span class="sn">Section 12</span><h2>Tech stack</h2><p>Languages, frameworks and test coverage.</p></div></div>
   <div class="sb">
     <p class="key">TypeScript across the platform, backed by more than 9,000 automated tests.</p>
         <div class="tw"><table>
@@ -872,7 +874,7 @@ footer p{margin:0;padding-top:22px;border-top:1px solid var(--line-2)}
 </section>
 
 <section id="s13">
-  <div class="sh"><div class="no">13</div><h2><svg class="ic2" aria-hidden="true"><use href="#i-lock"/></svg>Security</h2><p>Protection for payments, minors, data and infrastructure.</p></div>
+  <div class="sh"><div class="no"><svg class="ic2" aria-hidden="true"><use href="#i-lock"/></svg></div><div class="sx"><span class="sn">Section 13</span><h2>Security</h2><p>Protection for payments, minors, data and infrastructure.</p></div></div>
   <div class="sb">
     <p class="key">Deny-by-default permissions, child-privacy controls, signed payments and layered cloud protection.</p>
 
@@ -887,7 +889,7 @@ footer p{margin:0;padding-top:22px;border-top:1px solid var(--line-2)}
 </section>
 
 <section id="s14">
-  <div class="sh"><div class="no">14</div><h2><svg class="ic2" aria-hidden="true"><use href="#i-book"/></svg>Glossary</h2><p>Terms used in this document.</p></div>
+  <div class="sh"><div class="no"><svg class="ic2" aria-hidden="true"><use href="#i-book"/></svg></div><div class="sx"><span class="sn">Section 14</span><h2>Glossary</h2><p>Terms used in this document.</p></div></div>
   <div class="sb">
     <div class="tw"><table>
       <tbody>
